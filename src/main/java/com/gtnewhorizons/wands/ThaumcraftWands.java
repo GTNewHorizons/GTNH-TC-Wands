@@ -9,7 +9,9 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import gregtech.api.enums.GT_Values;
 import gregtech.api.util.GT_ModHandler;
+import gregtech.loaders.postload.GT_MachineRecipeLoader;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -24,13 +26,14 @@ import thaumcraft.api.wands.WandRod;
 import thaumcraft.common.lib.crafting.ArcaneSceptreRecipe;
 import thaumcraft.common.lib.crafting.ArcaneWandRecipe;
 
-@Mod(modid="gtnhtcwands", name="GTNH-TC-Wands", version="1.0.3", dependencies=ThaumcraftWands.dependencies)
+@Mod(modid="gtnhtcwands", name="GTNH-TC-Wands", version="1.0.4", dependencies=ThaumcraftWands.dependencies)
+
 public class ThaumcraftWands {
 
 	final static String dependencies=
-			                  "required-after:Thaumcraft;"
+			          "required-after:Thaumcraft;"
 	                         +"required-after:dreamcraft;"
-			                 +"required-after:gregtech;"
+			         +"required-after:gregtech;"
 	                         +"required-after:TwilightForest;"
 	                         +"after:ForbiddenMagic;"
 	                         +"after:TaintedMagic;"
@@ -256,7 +259,7 @@ public class ThaumcraftWands {
 
 	}
 
-	private static Object[] getRecipe(String rod, String cap, boolean sceptre) {
+	public static Object[] getRecipe(String rod, String cap, boolean sceptre) {
 		ItemStack core;
 		if(rod.contains("_staff"))core = StaffRod.rods.get(rod).getItem();
 		else if(rod=="wood"&&Loader.isModLoaded("Forestry")) core = GT_ModHandler.getModItem("Forestry", "oakStick", 1);
@@ -341,17 +344,17 @@ public class ThaumcraftWands {
 	}
 
 	private static void removeTCWands() {
-		ArrayList<IArcaneRecipe> l1 = new ArrayList<IArcaneRecipe>();
-		try {
-          Field f = ThaumcraftApi.class.getDeclaredField("craftingRecipes");
-          f.setAccessible(true);
-          ArrayList<IArcaneRecipe> l2 = (ArrayList<IArcaneRecipe>) f.get(ArrayList.class);
-          for(IArcaneRecipe r: l2)
-           if(!(r instanceof ArcaneWandRecipe||r instanceof ArcaneSceptreRecipe))
-            l1.add(r);
-          f.set(ArrayList.class, l1);
-		}
-		catch(Exception e) {}
-		}
+	  ArrayList<Object> l1 = new ArrayList<Object>();
+	  try {
+           Field f = ThaumcraftApi.class.getDeclaredField("craftingRecipes");
+           f.setAccessible(true);
+           ArrayList<Object> l2 = (ArrayList) f.get(ArrayList.class);
+           for(Object r: l2)
+            if(!(r instanceof ArcaneWandRecipe||r instanceof ArcaneSceptreRecipe))
+             l1.add(r);
+           f.set(ArrayList.class, l1);
+	   }
+	   catch(Exception e) {}
+	}
 
 }
