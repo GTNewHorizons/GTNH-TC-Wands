@@ -21,11 +21,12 @@ import thaumcraft.api.wands.WandRod;
 import thaumcraft.common.lib.crafting.ArcaneSceptreRecipe;
 import thaumcraft.common.lib.crafting.ArcaneWandRecipe;
 
-@Mod(modid="gtnhtcwands", name="GTNH-TC-Wands", version="1.0.4", dependencies=ThaumcraftWands.dependencies)
-
+@Mod(modid = ThaumcraftWands.MODID, name = ThaumcraftWands.NAME, version = ThaumcraftWands.VERSION, dependencies = ThaumcraftWands.DEPENDENCIES)
 public class ThaumcraftWands {
-
-	final static String dependencies=
+    public static final String MODID = "gtnhtcwands";
+    public static final String NAME = "GTNH-TC-Wands";
+    public static final String VERSION = "1.0.4";
+	public static final String DEPENDENCIES =
 			          "required-after:Thaumcraft;"
 	                         +"required-after:dreamcraft;"
 			        		 +"required-after:gregtech;"
@@ -37,7 +38,7 @@ public class ThaumcraftWands {
 	                         +"after:ThaumicExploration;"
 	                         +"after:ThaumicTinkerer;";
 	@Mod.Instance
-	public static ThaumcraftWands instance = new ThaumcraftWands();
+	public static ThaumcraftWands instance;
 
 	static final int LV  = 1,
 			         MV  = 2,
@@ -59,7 +60,6 @@ public class ThaumcraftWands {
 	public static ArrayList<WandCap> caps = new ArrayList<>();
 
 	static {
-
 		cores.add(new WandCore("wood", GT_ModHandler.getModItem("Forestry", "oakStick", 1, 0, new ItemStack(Items.stick)), MV, NAGA, 0, 5, 2F));
 		cores.add(new WandCore("greatwood", HV, LICH, 20, 5, 2F));
 		cores.add(new WandCore("reed", EV, HYDRA, 50, 10, 1.5F));
@@ -140,7 +140,7 @@ public class ThaumcraftWands {
 	}
 
 	@EventHandler
-	public void postinit(FMLPostInitializationEvent e) {
+	public void postInit(FMLPostInitializationEvent e) {
         removeTCWands();
         addWandParts();
 		makeWands();
@@ -178,9 +178,9 @@ public class ThaumcraftWands {
 				for(Aspect a:Aspect.getPrimalAspects()) wandAspects.add(a, wandCost);
 				for(Aspect a:Aspect.getPrimalAspects()) sceptreAspects.add(a, sceptreCost);
 
-				if(core.getName() == "warpwood") ThaumcraftApi.addArcaneCraftingRecipe("RoD_WarpwoodGTNH", wand, wandAspects, getRecipe(core, cap, false));
+				if(core.getName().equals("warpwood")) ThaumcraftApi.addArcaneCraftingRecipe("RoD_WarpwoodGTNH", wand, wandAspects, getRecipe(core, cap, false));
 
-				else if(core.getName() == "warpwood_staff") ThaumcraftApi.addArcaneCraftingRecipe("RoD_Warpwood_StaffGTNH"+core, wand, wandAspects, getRecipe(core, cap, false));
+				else if(core.getName().equals("warpwood_staff")) ThaumcraftApi.addArcaneCraftingRecipe("RoD_Warpwood_StaffGTNH"+core, wand, wandAspects, getRecipe(core, cap, false));
 
 				else ThaumcraftApi.addArcaneCraftingRecipe("ROD_"+core, wand, wandAspects, getRecipe(core, cap, false));
 
@@ -201,21 +201,21 @@ public class ThaumcraftWands {
 				"MCP",
 				"SRC",
 				"CSM",
-				Character.valueOf('R'), rod.getItem(),
-				Character.valueOf('M'), rod.getConductor(),
-				Character.valueOf('S'), rod.getScrew(),
-				Character.valueOf('C'), cap.getItem(),
-				Character.valueOf('P'), GT_ModHandler.getModItem("Thaumcraft", "ItemResource", 1, 15, new ItemStack(Items.sugar))
+                'R', rod.getItem(),
+                'M', rod.getConductor(),
+                'S', rod.getScrew(),
+                'C', cap.getItem(),
+                'P', GT_ModHandler.getModItem("Thaumcraft", "ItemResource", 1, 15, new ItemStack(Items.sugar))
 		};
 
 		else return new Object[] {
 				"MSC",
 				"SRS",
 				"CSM",
-				Character.valueOf('R'), rod.getItem(),
-				Character.valueOf('M'), rod.getConductor(),
-				Character.valueOf('S'), rod.getScrew(),
-				Character.valueOf('C'), cap.getItem()
+                'R', rod.getItem(),
+                'M', rod.getConductor(),
+                'S', rod.getScrew(),
+                'C', cap.getItem()
 		};
 	}
 
@@ -250,8 +250,9 @@ public class ThaumcraftWands {
 		thaumcraft.api.wands.WandCap.caps.put(name,c);
 	}
 
-	private static void removeTCWands() {
-	  ArrayList<Object> l1 = new ArrayList<Object>();
+	@SuppressWarnings("unchecked")
+    private static void removeTCWands() {
+	  ArrayList<Object> l1 = new ArrayList<>();
 	  try {
            Field f = ThaumcraftApi.class.getDeclaredField("craftingRecipes");
            f.setAccessible(true);
@@ -261,7 +262,7 @@ public class ThaumcraftWands {
              l1.add(r);
            f.set(ArrayList.class, l1);
 	   }
-	   catch(Exception e) {}
+	   catch(Exception ignored) {}
 	}
 
 }
