@@ -58,7 +58,16 @@ public class ThaumcraftWands {
 	public static ArrayList<WandCore> cores = new ArrayList<>();
 	public static ArrayList<WandCap> caps = new ArrayList<>();
 
-	static {
+
+	@EventHandler
+	public void postinit(FMLPostInitializationEvent e) {
+		removeTCWands();
+		addWandParts();
+		setupWandParts();
+		makeWands();
+	}
+
+	public static void setupWandParts() {
 
 		cores.add(new WandCore("wood", GT_ModHandler.getModItem("Forestry", "oakStick", 1, 0, new ItemStack(Items.stick)), MV, NAGA, 0, 5, 2F));
 		cores.add(new WandCore("greatwood", HV, LICH, 20, 5, 2F));
@@ -137,13 +146,6 @@ public class ThaumcraftWands {
 
 	//  caps.add(new WandCap("enderium", 7));
 
-	}
-
-	@EventHandler
-	public void postinit(FMLPostInitializationEvent e) {
-        removeTCWands();
-        addWandParts();
-		makeWands();
 	}
 
 	public void addWandParts() {
