@@ -16,7 +16,6 @@ options.txt
 usernamecache.json
 *.bat
 eclipse/
-gradle/
 TC-Wands.iws
 TC-Wands.ipr
 TC-Wands.iml
