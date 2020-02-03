@@ -1,0 +1,19 @@
+[
+  {
+    "modid": "tcwandprovider",
+    "name": "TC Wand Provider",
+    "description": "Adds ability to modify TC wand recipes",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "Zoko061602",
+      "Time_Conqueror"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
