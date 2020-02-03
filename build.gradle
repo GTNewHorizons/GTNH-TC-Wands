@@ -2,6 +2,10 @@ buildscript {
     repositories {
         mavenCentral()
         maven {
+            name = "gt"
+            url = "https://gregtech.overminddl1.com/"
+        }
+        maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
@@ -17,7 +21,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.0.4"
+version = "1.1.0"
 group= "com.gtnewhorizons.wands" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "GTNH-TC-Wands"
 

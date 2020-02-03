@@ -28,7 +28,7 @@ public class ThaumcraftWands {
 	final static String dependencies=
 			          "required-after:Thaumcraft;"
 	                         +"required-after:dreamcraft;"
-			         +"required-after:gregtech;"
+			        		 +"required-after:gregtech;"
 	                         +"required-after:TwilightForest;"
 	                         +"after:ForbiddenMagic;"
 	                         +"after:TaintedMagic;"
@@ -36,7 +36,7 @@ public class ThaumcraftWands {
 	                         +"after:thaumicbases;"
 	                         +"after:ThaumicExploration;"
 	                         +"after:ThaumicTinkerer;";
-	@Instance
+	@Mod.Instance
 	public static ThaumcraftWands instance = new ThaumcraftWands();
 
 	static final int LV  = 1,
