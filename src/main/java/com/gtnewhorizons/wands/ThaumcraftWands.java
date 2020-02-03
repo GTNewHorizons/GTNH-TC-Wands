@@ -1,9 +1,5 @@
 package com.gtnewhorizons.wands;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -20,6 +16,10 @@ import thaumcraft.api.wands.StaffRod;
 import thaumcraft.api.wands.WandRod;
 import thaumcraft.common.lib.crafting.ArcaneSceptreRecipe;
 import thaumcraft.common.lib.crafting.ArcaneWandRecipe;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 @Mod(modid = ThaumcraftWands.MODID, name = ThaumcraftWands.NAME, version = ThaumcraftWands.VERSION, dependencies = ThaumcraftWands.DEPENDENCIES)
 public class ThaumcraftWands {
@@ -168,55 +168,58 @@ public class ThaumcraftWands {
 				int sceptreCost = getCost(core, cap, true);
 
 				NBTTagCompound wandNbt = new NBTTagCompound();
-				wandNbt.setString("rod", core.getName());
-				wandNbt.setString("cap", cap.getName());
-				wand.setTagCompound(wandNbt);
-				wand.setItemDamage(getCost(core, cap, false));
+			 wandNbt.setString("rod", core.getName());
+			 wandNbt.setString("cap", cap.getName());
+			 wand.setTagCompound(wandNbt);
+			 wand.setItemDamage(getCost(core, cap, false));
 
-				AspectList wandAspects = new AspectList();
-				AspectList sceptreAspects = new AspectList();
-				for(Aspect a:Aspect.getPrimalAspects()) wandAspects.add(a, wandCost);
-				for(Aspect a:Aspect.getPrimalAspects()) sceptreAspects.add(a, sceptreCost);
+			 AspectList wandAspects = new AspectList();
+			 AspectList sceptreAspects = new AspectList();
+			 for (Aspect a : Aspect.getPrimalAspects()) wandAspects.add(a, wandCost);
+			 for (Aspect a : Aspect.getPrimalAspects()) sceptreAspects.add(a, sceptreCost);
 
-				if(core.getName().equals("warpwood")) ThaumcraftApi.addArcaneCraftingRecipe("RoD_WarpwoodGTNH", wand, wandAspects, getRecipe(core, cap, false));
+			 if (core.getName().equals("warpwood"))
+				 ThaumcraftApi.addArcaneCraftingRecipe("RoD_WarpwoodGTNH", wand, wandAspects, getRecipe(core, cap, false));
+			 else if (core.getName().equals("warpwood_staff"))
+				 ThaumcraftApi.addArcaneCraftingRecipe("RoD_Warpwood_StaffGTNH" + core, wand, wandAspects, getRecipe(core, cap, false));
+			 else
+				 ThaumcraftApi.addArcaneCraftingRecipe("ROD_" + core, wand, wandAspects, getRecipe(core, cap, false));
 
-				else if(core.getName().equals("warpwood_staff")) ThaumcraftApi.addArcaneCraftingRecipe("RoD_Warpwood_StaffGTNH"+core, wand, wandAspects, getRecipe(core, cap, false));
+			 NBTTagCompound sceptreNbt = new NBTTagCompound();
+			 sceptreNbt.setString("rod", core.getName());
+			 sceptreNbt.setString("cap", cap.getName());
+			 sceptreNbt.setByte("sceptre", (byte) 1);
+			 wand.setTagCompound(sceptreNbt);
+			 wand.setItemDamage(getCost(core, cap, true));
 
-				else ThaumcraftApi.addArcaneCraftingRecipe("ROD_"+core, wand, wandAspects, getRecipe(core, cap, false));
-
-				NBTTagCompound sceptreNbt = new NBTTagCompound();
-				sceptreNbt.setString("rod", core.getName());
-				sceptreNbt.setString("cap", cap.getName());
-				sceptreNbt.setByte("sceptre", (byte) 1);
-				wand.setTagCompound(sceptreNbt);
-				wand.setItemDamage(getCost(core, cap, true));
-
-				ThaumcraftApi.addArcaneCraftingRecipe("SCEPTRE", wand, sceptreAspects, getRecipe(core, cap, true));
+			 ThaumcraftApi.addArcaneCraftingRecipe("SCEPTRE", wand, sceptreAspects, getRecipe(core, cap, true));
 
 		}
 	}
 
 	public static Object[] getRecipe(WandCore rod, WandCap cap, boolean sceptre) {
-		if(sceptre) return new Object[] {
-				"MCP",
-				"SRC",
-				"CSM",
-                'R', rod.getItem(),
-                'M', rod.getConductor(),
-                'S', rod.getScrew(),
-                'C', cap.getItem(),
-                'P', GT_ModHandler.getModItem("Thaumcraft", "ItemResource", 1, 15, new ItemStack(Items.sugar))
-		};
-
-		else return new Object[] {
-				"MSC",
-				"SRS",
-				"CSM",
-                'R', rod.getItem(),
-                'M', rod.getConductor(),
-                'S', rod.getScrew(),
-                'C', cap.getItem()
-		};
+		if (sceptre) {
+			return new Object[]{
+					"MCP",
+					"SRC",
+					"CSM",
+					'R', rod.getItem(),
+					'M', rod.getConductor(),
+					'S', rod.getScrew(),
+					'C', cap.getItem(),
+					'P', GT_ModHandler.getModItem("Thaumcraft", "ItemResource", 1, 15, new ItemStack(Items.sugar))
+			};
+		} else {
+			return new Object[]{
+					"MSC",
+					"SRS",
+					"CSM",
+					'R', rod.getItem(),
+					'M', rod.getConductor(),
+					'S', rod.getScrew(),
+					'C', cap.getItem()
+			};
+		}
 	}
 
 	public static int getCost(WandCore core, WandCap cap, boolean sceptre){
