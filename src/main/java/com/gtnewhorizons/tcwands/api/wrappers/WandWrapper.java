@@ -2,7 +2,6 @@ package com.gtnewhorizons.tcwands.api.wrappers;
 
 import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class WandWrapper extends AbstractWandWrapper {
@@ -25,7 +24,7 @@ public class WandWrapper extends AbstractWandWrapper {
                 "CSM",
                 'R', customRod != null ? customRod : getItem(cap),
                 'M', getDetails().getConductor(),
-                'S', new ItemStack(Items.diamond_axe),//getDetails().getScrew()FIXME
+                'S', getDetails().getScrew(),
                 'C', cap.getItem()
         };
     }

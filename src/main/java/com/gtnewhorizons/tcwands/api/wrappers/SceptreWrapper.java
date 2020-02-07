@@ -48,7 +48,6 @@ public class SceptreWrapper extends AbstractWandWrapper {
 
     @Override
     public String getDefaultResearchName() {
-        String name = getDetails().getName();
-        return "SCEPTRE_" + (name.endsWith("_staff") ? name.substring(0, name.length() - 6) : name);//FIXME maybe only "SCEPTRE"?
+        return "SCEPTRE";
     }
 }
