@@ -21,24 +21,41 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.1.1"
-group= "com.gtnewhorizons.wands" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+file "build.properties" withReader {
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
+
+version = "${config.project.version}"
+group = "com.gtnewhorizons" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "GTNH-TC-Wands"
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
     runDir = "eclipse"
+
+    replaceIn "src/main/java/com/gtnewhorizons/tcwands/TCWandsMod.java"
+    def versionArray = project.version.tokenize('-')
+    replace "GRADLETOKEN_VERSION", versionArray.get(0)
+    replace "/* + \"required-after:dreamcraft;\"*/", "+ \"required-after:dreamcraft;\""
+}
+
+repositories {
+    flatDir name: 'localRepo', dirs: [new File("maven").absolutePath]
 }
 
 dependencies {
+    compile 'org.jetbrains:annotations:18.0.0'
+    compile ':gregtech:5.09.32.24'
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"
     //compile "some.group:artifact:version"
-      
+
     // real examples
     //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
     //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
@@ -50,21 +67,21 @@ dependencies {
 }
 
 processResources
-{
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+        {
+            // this will ensure that this task is redone when the versions change.
+            inputs.property "version", project.version
+            inputs.property "mcversion", project.minecraft.version
 
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-        
-    // copy everything else, thats not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
-}
+            // replace stuff in mcmod.info, nothing else
+            from(sourceSets.main.resources.srcDirs) {
+                include 'mcmod.info'
+
+                // replace version and mcversion
+                expand 'version': project.version, 'mcversion': project.minecraft.version
+            }
+
+            // copy everything else, thats not the mcmod.info
+            from(sourceSets.main.resources.srcDirs) {
+                exclude 'mcmod.info'
+            }
+        }
