@@ -2,10 +2,7 @@ package com.gtnewhorizons.tcwands.api;
 
 import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
-import com.gtnewhorizons.tcwands.api.wrappers.AbstractWandWrapper;
-import com.gtnewhorizons.tcwands.api.wrappers.SceptreWrapper;
-import com.gtnewhorizons.tcwands.api.wrappers.StaffWrapper;
-import com.gtnewhorizons.tcwands.api.wrappers.WandWrapper;
+import com.gtnewhorizons.tcwands.api.wrappers.*;
 import net.minecraft.item.ItemStack;
 import org.intellij.lang.annotations.MagicConstant;
 
@@ -152,7 +149,7 @@ public class WandRecipeCreator {
             if (staffDetails == null || staffProps == null) {
                 throw new IllegalStateException("You can't use regSceptreRecipe(...) with flag " + parentType + " without calling regStaffRecipe(...) method.");
             }
-            sceptreWrapper = new SceptreWrapper(staffDetails, staffProps, sceptreCostMultiplier);
+            sceptreWrapper = new StaffSceptreWrapper(staffDetails, staffProps, sceptreCostMultiplier);
         } else {
             throw new UnsupportedOperationException("Provided unknown type: " + parentType);
         }
