@@ -1,4 +1,4 @@
-package com.gtnewhorizons.tcwandprovider.api.wandinfo;
+package com.gtnewhorizons.tcwands.api.wandinfo;
 
 public class WandProps {
     private int baseCost, capCost;

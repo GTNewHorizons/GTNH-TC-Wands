@@ -1,21 +1,22 @@
-package com.gtnewhorizons.tcwandprovider;
+package com.gtnewhorizons.tcwands;
 
-import com.gtnewhorizons.tcwandprovider.api.TCWandAPI;
+import com.gtnewhorizons.tcwands.api.TCWandAPI;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-@Mod(modid = TCWandProvider.MODID, name = TCWandProvider.NAME, version = TCWandProvider.VERSION, dependencies = TCWandProvider.DEPENDENCIES)
-public class TCWandProvider {
-    public static final String MODID = "tcwandprovider";
-    public static final String NAME = "TC Wand Provider";
+@Mod(modid = TCWandsMod.MODID, name = TCWandsMod.NAME, version = TCWandsMod.VERSION, dependencies = TCWandsMod.DEPENDENCIES)
+public class TCWandsMod {
+    public static final String MODID = "gtnhtcwands";
+    public static final String NAME = "GTNH-TC-Wands";
     public static final String VERSION = "GRADLETOKEN_VERSION";
-
     public static final String DEPENDENCIES =
             "required-after:Thaumcraft;"
-                    /* + "required-after:dreamcraft;"*/
+                    /* + "required-after:dreamcraft;"*///FIXME why do we need it?
                     + "required-after:gregtech;"
-                    /* + "required-after:TwilightForest;"*/
+                    + "required-after:TwilightForest;"
                     + "after:ForbiddenMagic;"
                     + "after:TaintedMagic;"
                     + "after:BloodArsenal;"
@@ -23,14 +24,13 @@ public class TCWandProvider {
                     + "after:ThaumicExploration;"
                     + "after:ThaumicTinkerer;";
 
+    public static final Logger LOGGER = LogManager.getLogger(NAME);
     @Mod.Instance
-    public static TCWandProvider instance;
-
-    private static GTWandRegistry wandRegistry = new GTWandRegistry();
+    public static TCWandsMod instance;
 
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
-        TCWandAPI.addRegistry(wandRegistry);
+        TCWandAPI.addRegistry(new GTWandRegistry());
     }
 
     @Mod.EventHandler

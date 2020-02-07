@@ -1,18 +1,19 @@
-package com.gtnewhorizons.tcwandprovider.api.wandinfo;
+package com.gtnewhorizons.tcwands.api.wandinfo;
 
-import com.gtnewhorizons.tcwandprovider.api.GTTiers;
+import com.gtnewhorizons.tcwands.api.GTTier;
 import gregtech.api.enums.Materials;
-import gregtech.api.enums.Tier;
 import net.minecraft.item.ItemStack;
 
 public class WandDetails {
     private String name;
     private Materials material;
+    private GTTier tier;
     private ItemStack conductor;
 
-    public WandDetails(String name, GTTiers tier, ItemStack conductor) {
+    public WandDetails(String name, GTTier tier, ItemStack conductor) {
         this.name = name;
-        this.material = Tier.ELECTRIC[tier.getIndex()].getMaterial();
+        this.tier = tier;
+        this.material = tier.getGregTier().getMaterial();
         this.conductor = conductor;
     }
 
@@ -26,6 +27,10 @@ public class WandDetails {
 
     public Materials getMaterial() {
         return material;
+    }
+
+    public GTTier getTier() {
+        return tier;
     }
 
     public String getScrew() {

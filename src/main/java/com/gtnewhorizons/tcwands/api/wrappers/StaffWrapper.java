@@ -1,19 +1,17 @@
-package com.gtnewhorizons.tcwandprovider.api.wrappers;
+package com.gtnewhorizons.tcwands.api.wrappers;
 
-import com.gtnewhorizons.tcwandprovider.api.WandCap;
-import com.gtnewhorizons.tcwandprovider.api.wandinfo.WandDetails;
-import com.gtnewhorizons.tcwandprovider.api.wandinfo.WandProps;
+import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
+import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
 import net.minecraft.item.ItemStack;
-import thaumcraft.api.wands.StaffRod;
 import thaumcraft.common.config.ConfigItems;
 
 public class StaffWrapper extends AbstractWandWrapper {
     public StaffWrapper(WandDetails details, WandProps props) {
-        super(details, props, StaffRod.rods.get(details.getName() + "_staff"));
+        super(details, props);
     }
 
     @Override
-    public Object[] genRecipe(WandCap cap) {
+    public Object[] genRecipe(CapWrapper cap) {
         return new Object[]{
                 "MCP",
                 "SRC",
@@ -32,7 +30,7 @@ public class StaffWrapper extends AbstractWandWrapper {
     }
 
     @Override
-    public String getRecipeName() {
+    public String getDefaultResearchName() {
         return "ROD_" + getDetails().getName();
     }
 }

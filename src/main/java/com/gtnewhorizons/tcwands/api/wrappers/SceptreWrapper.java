@@ -1,18 +1,17 @@
-package com.gtnewhorizons.tcwandprovider.api.wrappers;
+package com.gtnewhorizons.tcwands.api.wrappers;
 
-import com.gtnewhorizons.tcwandprovider.api.WandCap;
-import com.gtnewhorizons.tcwandprovider.api.wandinfo.WandDetails;
-import com.gtnewhorizons.tcwandprovider.api.wandinfo.WandProps;
+import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
+import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import thaumcraft.api.wands.WandRod;
 import thaumcraft.common.config.ConfigItems;
 
 public class SceptreWrapper extends AbstractWandWrapper {
     private float sceptreCostMultiplier;
 
     public SceptreWrapper(WandDetails wandDetails, WandProps wandProps, float sceptreCostMultiplier) {
-        super(wandDetails, wandProps, WandRod.rods.get(wandDetails.getName()));
+//        super(wandDetails, wandProps, WandRod.rods.get(wandDetails.getName()));
+        super(wandDetails, wandProps);
         this.sceptreCostMultiplier = sceptreCostMultiplier;
     }
 
@@ -21,7 +20,7 @@ public class SceptreWrapper extends AbstractWandWrapper {
     }
 
     @Override
-    protected NBTTagCompound writeNBT(WandCap cap) {
+    protected NBTTagCompound writeNBT(CapWrapper cap) {
         NBTTagCompound wandNbt = super.writeNBT(cap);
         wandNbt.setByte("sceptre", (byte) 1);
 
@@ -29,12 +28,12 @@ public class SceptreWrapper extends AbstractWandWrapper {
     }
 
     @Override
-    public int getRecipeCost(WandCap cap) {
-        return (int) (super.getRecipeCost(cap) * getSceptreCostMultiplier());
+    public int getRecipeCost(CapWrapper cap) {
+        return (int) (super.getRecipeCost(cap) * sceptreCostMultiplier);
     }
 
     @Override
-    public Object[] genRecipe(WandCap cap) {
+    public Object[] genRecipe(CapWrapper cap) {
         return new Object[]{
                 "MCP",
                 "SRC",
@@ -48,8 +47,8 @@ public class SceptreWrapper extends AbstractWandWrapper {
     }
 
     @Override
-    public String getRecipeName() {
+    public String getDefaultResearchName() {
         String name = getDetails().getName();
-        return "SCEPTRE_" + (name.endsWith("_staff") ? name.substring(0, name.length() - 6) : name);
+        return "SCEPTRE_" + (name.endsWith("_staff") ? name.substring(0, name.length() - 6) : name);//FIXME maybe only "SCEPTRE"?
     }
 }
