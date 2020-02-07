@@ -14,7 +14,7 @@ public class TCWandsMod {
     public static final String VERSION = "GRADLETOKEN_VERSION";
     public static final String DEPENDENCIES =
             "required-after:Thaumcraft;"
-                    /* + "required-after:dreamcraft;"*///FIXME why do we need it?
+                    /* + "required-after:dreamcraft;"*///will be automatically uncommented when build
                     + "required-after:gregtech;"
                     + "required-after:TwilightForest;"
                     + "after:ForbiddenMagic;"

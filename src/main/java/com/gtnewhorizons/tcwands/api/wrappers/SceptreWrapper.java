@@ -10,7 +10,6 @@ public class SceptreWrapper extends AbstractWandWrapper {
     private float sceptreCostMultiplier;
 
     public SceptreWrapper(WandDetails wandDetails, WandProps wandProps, float sceptreCostMultiplier) {
-//        super(wandDetails, wandProps, WandRod.rods.get(wandDetails.getName()));
         super(wandDetails, wandProps);
         this.sceptreCostMultiplier = sceptreCostMultiplier;
     }
@@ -38,7 +37,7 @@ public class SceptreWrapper extends AbstractWandWrapper {
                 "MCP",
                 "SRC",
                 "CSM",
-                'R', getItem(cap),
+                'R', getRod(),
                 'M', getDetails().getConductor(),
                 'S', getDetails().getScrew(),
                 'C', cap.getItem(),

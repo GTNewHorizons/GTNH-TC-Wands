@@ -16,7 +16,7 @@ public class StaffWrapper extends AbstractWandWrapper {
                 "MCP",
                 "SRC",
                 "CSM",
-                'R', getItem(cap),
+                'R', getRod(),
                 'M', getDetails().getConductor(),
                 'S', getDetails().getScrew(),
                 'C', cap.getItem(),

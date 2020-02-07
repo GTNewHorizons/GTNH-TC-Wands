@@ -4,6 +4,7 @@ import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import thaumcraft.api.wands.WandRod;
 import thaumcraft.common.config.ConfigItems;
 
 public abstract class AbstractWandWrapper {
@@ -11,10 +12,18 @@ public abstract class AbstractWandWrapper {
     private WandProps wandProps;
 
     private String customResearchName;
+    private ItemStack rod;
 
     public AbstractWandWrapper(WandDetails wandDetails, WandProps wandProps) {
         this.wandDetails = wandDetails;
         this.wandProps = wandProps;
+
+        WandRod wandRod = WandRod.rods.get(getRodName());
+
+        if (wandRod == null)
+            throw new NullPointerException("Can't find provided wand rod with id: " + getRodName() + ". Be careful to register your custom rod before creating recipes.");
+
+        this.rod = wandRod.getItem();
     }
 
     public ItemStack getItem(CapWrapper cap) {
@@ -58,6 +67,10 @@ public abstract class AbstractWandWrapper {
 
     public void setCustomResearchName(String customResearchName) {
         this.customResearchName = customResearchName;
+    }
+
+    public ItemStack getRod() {
+        return rod;
     }
 
     public String getRodName() {

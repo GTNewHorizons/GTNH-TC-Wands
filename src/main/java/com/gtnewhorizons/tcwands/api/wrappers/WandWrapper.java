@@ -22,7 +22,7 @@ public class WandWrapper extends AbstractWandWrapper {
                 "MSC",
                 "SRS",
                 "CSM",
-                'R', customRod != null ? customRod : getItem(cap),
+                'R', customRod != null ? customRod : getRod(),
                 'M', getDetails().getConductor(),
                 'S', getDetails().getScrew(),
                 'C', cap.getItem()
