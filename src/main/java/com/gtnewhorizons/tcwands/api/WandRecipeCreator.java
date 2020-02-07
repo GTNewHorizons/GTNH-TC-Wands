@@ -4,11 +4,11 @@ import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
 import com.gtnewhorizons.tcwands.api.wrappers.*;
 import net.minecraft.item.ItemStack;
-import org.intellij.lang.annotations.MagicConstant;
 
+/**
+ * This class allows to register wand recipes easier.
+ */
 public class WandRecipeCreator {
-    public static final int WAND = 0;
-    public static final int STAFF = 1;
     private String name;
     private WandDetails wandDetails = null;
     private WandDetails staffDetails = null;
@@ -16,10 +16,11 @@ public class WandRecipeCreator {
     private WandProps staffProps = null;
 
     private String customResearchName = null;
+    private ItemStack customCraftingRod = null;
 
     /**
-     * The name of rod material.
-     * Shouldn't contain _staff postfix, it will be substituted automatically if you register a staff or staff-sceptre recipe.
+     * @param name the name of rod material.
+     *             Shouldn't contain _staff postfix, it will be substituted automatically if you register a staff or staff-sceptre recipe.
      */
     public WandRecipeCreator(String name) {
         this.name = name;
@@ -55,21 +56,23 @@ public class WandRecipeCreator {
     }
 
     /**
-     * Registers wand recipe with provided base, cap cost, GT tier and custom rod itemstack, that will be used for crafting.
+     * Registers wand recipe with provided base, cap cost, GT tier and custom crafting rod.
      * Conductor will be got from tier.
+     *
+     * @param customCraftingRod item that will be used in wand and ALSO IN SCEPTRE recipes instead of default rod.
      */
-    public WandRecipeCreator regWandRecipe(int baseCost, int capCost, ItemStack rod, GTTier tier) {
-        return regWandRecipe(baseCost, capCost, rod, tier, tier.getConductor());
+    public WandRecipeCreator regWandRecipe(int baseCost, int capCost, ItemStack customCraftingRod, GTTier tier) {
+        return regWandRecipe(baseCost, capCost, customCraftingRod, tier, tier.getConductor());
     }
 
     /**
-     * Registers wand recipe with provided base, cap cost, GT tier, conductor and custom rod itemstack, that will be used for crafting.
+     * Registers wand recipe with provided base, cap cost, GT tier, conductor and custom crafting rod.
+     *
+     * @param customCraftingRod item that will be used in wand and ALSO IN SCEPTRE recipes instead of default rod.
      */
-    public WandRecipeCreator regWandRecipe(int baseCost, int capCost, ItemStack rod, GTTier tier, ItemStack conductor) {
-        this.wandProps = new WandProps(baseCost, capCost);
-        this.wandDetails = new WandDetails(name, tier, conductor);
-        regWandWrapper(new WandWrapper(wandDetails, wandProps, rod));
-        return this;
+    public WandRecipeCreator regWandRecipe(int baseCost, int capCost, ItemStack customCraftingRod, GTTier tier, ItemStack conductor) {
+        this.customCraftingRod = customCraftingRod;
+        return regWandRecipe(baseCost, capCost, tier, conductor);
     }
 
     /**
@@ -118,7 +121,13 @@ public class WandRecipeCreator {
      * @param sceptreCostMultiplier multiplier that will be applied on total recipe cost.
      */
     public WandRecipeCreator regSceptreRecipe(float sceptreCostMultiplier) {
-        return regSceptreRecipe(WAND, sceptreCostMultiplier);
+        if (wandDetails == null || wandProps == null) {
+            throw new IllegalStateException("You can't use regSceptreRecipe(...) without calling regWandRecipe(...) method.");
+        }
+
+        SceptreWrapper sceptreWrapper = new SceptreWrapper(wandDetails, wandProps, sceptreCostMultiplier);
+        regWandWrapper(sceptreWrapper);
+        return this;
     }
 
     /**
@@ -128,32 +137,10 @@ public class WandRecipeCreator {
      * @param sceptreCostMultiplier multiplier that will be applied on total recipe cost.
      */
     public WandRecipeCreator regStaffSceptreRecipe(float sceptreCostMultiplier) {
-        return regSceptreRecipe(STAFF, sceptreCostMultiplier);
-    }
-
-    /**
-     * Register sceptre.
-     * Mustn't be called before any {@link #regWandRecipe} or {@link #regStaffRecipe} method (depends on {@code parentType} param).
-     *
-     * @param sceptreCostMultiplier multiplier that will be applied on total recipe cost.
-     */
-    public WandRecipeCreator regSceptreRecipe(@MagicConstant(intValues = {WAND, STAFF}) int parentType, float sceptreCostMultiplier) {
-        SceptreWrapper sceptreWrapper;
-        if (parentType == WAND) {
-            if (wandDetails == null || wandProps == null) {
-                throw new IllegalStateException("You can't use regSceptreRecipe(...) with flag " + parentType + " without calling regWandRecipe(...) method.");
-            }
-
-            sceptreWrapper = new SceptreWrapper(wandDetails, wandProps, sceptreCostMultiplier);
-        } else if (parentType == STAFF) {
-            if (staffDetails == null || staffProps == null) {
-                throw new IllegalStateException("You can't use regSceptreRecipe(...) with flag " + parentType + " without calling regStaffRecipe(...) method.");
-            }
-            sceptreWrapper = new StaffSceptreWrapper(staffDetails, staffProps, sceptreCostMultiplier);
-        } else {
-            throw new UnsupportedOperationException("Provided unknown type: " + parentType);
+        if (staffDetails == null || staffProps == null) {
+            throw new IllegalStateException("You can't use regStaffSceptreRecipe(...) without calling regStaffRecipe(...) method.");
         }
-
+        SceptreWrapper sceptreWrapper = new StaffSceptreWrapper(staffDetails, staffProps, sceptreCostMultiplier);
         regWandWrapper(sceptreWrapper);
         return this;
     }
@@ -167,6 +154,12 @@ public class WandRecipeCreator {
         if (customResearchName != null) {
             wandWrapper.setCustomResearchName(customResearchName);
             customResearchName = null;
+        }
+
+        if (wandWrapper.getType() == WandType.WAND || wandWrapper.getType() == WandType.SCEPTRE) {
+            if (customCraftingRod != null) {
+                wandWrapper.setCustomCraftingRod(customCraftingRod);
+            }
         }
     }
 }

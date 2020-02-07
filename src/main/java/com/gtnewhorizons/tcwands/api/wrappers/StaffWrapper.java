@@ -1,8 +1,10 @@
 package com.gtnewhorizons.tcwands.api.wrappers;
 
+import com.gtnewhorizons.tcwands.api.WandType;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
 import net.minecraft.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.common.config.ConfigItems;
 
 public class StaffWrapper extends AbstractWandWrapper {
@@ -16,7 +18,7 @@ public class StaffWrapper extends AbstractWandWrapper {
                 "MCP",
                 "SRC",
                 "CSM",
-                'R', getRod(),
+                'R', getCraftingRod(),
                 'M', getDetails().getConductor(),
                 'S', getDetails().getScrew(),
                 'C', cap.getItem(),
@@ -32,5 +34,10 @@ public class StaffWrapper extends AbstractWandWrapper {
     @Override
     public String getDefaultResearchName() {
         return "ROD_" + getDetails().getName();
+    }
+
+    @Override
+    public @NotNull WandType getType() {
+        return WandType.STAFF;
     }
 }

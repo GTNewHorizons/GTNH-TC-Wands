@@ -1,9 +1,11 @@
 package com.gtnewhorizons.tcwands.api.wrappers;
 
+import com.gtnewhorizons.tcwands.api.WandType;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.wands.WandRod;
 import thaumcraft.common.config.ConfigItems;
 
@@ -12,7 +14,10 @@ public abstract class AbstractWandWrapper {
     private WandProps wandProps;
 
     private String customResearchName;
-    private ItemStack rod;
+    /**
+     * Item that will be used in recipe at the place of rod.
+     */
+    private ItemStack craftingRod;
 
     public AbstractWandWrapper(WandDetails wandDetails, WandProps wandProps) {
         this.wandDetails = wandDetails;
@@ -23,7 +28,7 @@ public abstract class AbstractWandWrapper {
         if (wandRod == null)
             throw new NullPointerException("Can't find provided wand rod with id: " + getRodName() + ". Be careful to register your custom rod before creating recipes.");
 
-        this.rod = wandRod.getItem();
+        this.craftingRod = wandRod.getItem();
     }
 
     public ItemStack getItem(CapWrapper cap) {
@@ -61,6 +66,9 @@ public abstract class AbstractWandWrapper {
 
     protected abstract String getDefaultResearchName();
 
+    @NotNull
+    public abstract WandType getType();
+
     public String getResearchName() {
         return customResearchName != null ? customResearchName : getDefaultResearchName();
     }
@@ -69,8 +77,12 @@ public abstract class AbstractWandWrapper {
         this.customResearchName = customResearchName;
     }
 
-    public ItemStack getRod() {
-        return rod;
+    public void setCustomCraftingRod(ItemStack rod) {
+        this.craftingRod = rod;
+    }
+
+    public ItemStack getCraftingRod() {
+        return craftingRod;
     }
 
     public String getRodName() {

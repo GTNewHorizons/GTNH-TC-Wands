@@ -1,15 +1,16 @@
 package com.gtnewhorizons.tcwands.api.wrappers;
 
+import com.gtnewhorizons.tcwands.api.WandType;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
 import net.minecraft.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class WandWrapper extends AbstractWandWrapper {
-    private ItemStack customRod = null;
 
     public WandWrapper(WandDetails wandDetails, WandProps wandProps, ItemStack rod) {
         this(wandDetails, wandProps);
-        this.customRod = rod;
+        setCustomCraftingRod(rod);
     }
 
     public WandWrapper(WandDetails wandDetails, WandProps wandProps) {
@@ -22,7 +23,7 @@ public class WandWrapper extends AbstractWandWrapper {
                 "MSC",
                 "SRS",
                 "CSM",
-                'R', customRod != null ? customRod : getRod(),
+                'R', getCraftingRod(),
                 'M', getDetails().getConductor(),
                 'S', getDetails().getScrew(),
                 'C', cap.getItem()
@@ -32,5 +33,10 @@ public class WandWrapper extends AbstractWandWrapper {
     @Override
     public String getDefaultResearchName() {
         return "ROD_" + getDetails().getName();
+    }
+
+    @Override
+    public @NotNull WandType getType() {
+        return WandType.WAND;
     }
 }

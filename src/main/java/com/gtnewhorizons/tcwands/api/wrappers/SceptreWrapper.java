@@ -1,9 +1,11 @@
 package com.gtnewhorizons.tcwands.api.wrappers;
 
+import com.gtnewhorizons.tcwands.api.WandType;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.common.config.ConfigItems;
 
 public class SceptreWrapper extends AbstractWandWrapper {
@@ -37,7 +39,7 @@ public class SceptreWrapper extends AbstractWandWrapper {
                 "MCP",
                 "SRC",
                 "CSM",
-                'R', getRod(),
+                'R', getCraftingRod(),
                 'M', getDetails().getConductor(),
                 'S', getDetails().getScrew(),
                 'C', cap.getItem(),
@@ -48,5 +50,10 @@ public class SceptreWrapper extends AbstractWandWrapper {
     @Override
     public String getDefaultResearchName() {
         return "SCEPTRE";
+    }
+
+    @Override
+    public @NotNull WandType getType() {
+        return WandType.SCEPTRE;
     }
 }
