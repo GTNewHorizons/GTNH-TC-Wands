@@ -71,8 +71,7 @@ public class GTWandRegistry implements IWandRegistry {
             TCWandAPI.makeCap("shadowcloth", GT_ModHandler.getModItem("TaintedMagic", "ItemWandCap", 1, 3), 0.85F, 7, new ResourceLocation("taintedmagic", "textures/models/ModelWAND_CAP_SHADOW_CLOTH.png"));
             TCWandAPI.makeCap("crimsoncloth", GT_ModHandler.getModItem("TaintedMagic", "ItemWandCap", 1, 2), 0.80F, 9, new ResourceLocation("taintedmagic", "textures/models/ModelWAND_CAP_CRIMSON_CLOTH.png"));
 
-            new WandRecipeCreator("warpwood").applyCustomResearchName("RoD_WarpwoodGTNH"/*FIXME May Dream delete this?*/).regWandRecipe(135, 15, IV).regSceptreRecipe(1.2F)
-                    .applyCustomResearchName("RoD_Warpwood_StaffGTNH"/*FIXME May Dream delete this?*/).regUpwardStaffRecipe(200, 25).regStaffSceptreRecipe(1.2F);
+            new WandRecipeCreator("warpwood").regWandRecipe(135, 15, IV).regSceptreRecipe(1.2F).regUpwardStaffRecipe(200, 25).regStaffSceptreRecipe(1.2F);
 
             TCWandAPI.regCap(new CapWrapper("cloth", 3));
             TCWandAPI.regCap(new CapWrapper("crimsoncloth", 6));
