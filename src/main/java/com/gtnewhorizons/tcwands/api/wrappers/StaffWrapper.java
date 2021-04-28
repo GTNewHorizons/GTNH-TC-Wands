@@ -15,8 +15,8 @@ public class StaffWrapper extends AbstractWandWrapper {
     @Override
     public Object[] genRecipe(CapWrapper cap) {
         return new Object[]{
-                "MCP",
-                "SRC",
+                "MSC",
+                "SRS",
                 "CSM",
                 'R', getCraftingRod(),
                 'M', getDetails().getConductor(),
