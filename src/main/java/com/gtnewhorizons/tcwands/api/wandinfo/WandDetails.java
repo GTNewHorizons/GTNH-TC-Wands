@@ -14,6 +14,11 @@ public class WandDetails {
         this.name = name;
         this.tier = tier;
         this.material = tier.getGregTier().getMaterial();
+            if.tier.getGregTier(2).getMaterial(Material.StainlessSteel)
+            if.tier.getGregTier(3).getMaterial(Material.Ultimet)
+            if.tier.getGregTier(4).getMaterial(Material.TungstenSteel)
+            if.tier.getGregTier(5).getMaterial(Material.HSSG)
+            if.tier.getGregTier(6).getMaterial(Material.HSSS)
         this.conductor = conductor;
     }
 
