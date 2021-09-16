@@ -21,17 +21,17 @@ public class WandDetails {
         tieredMaterials[5] = Materials.Enderium;
         tieredMaterials[6] = Materials.Orharukon;
         tieredMaterials[7] = Materials.Osmiridium;
-        
+
         //fallback for any potential new tier in the GTTier enum
         for (int i=8; i<GTTier.values().length; i++){
-            tieredMaterials[7] = GTTier.values()[i].getGregTier().getMaterial(); ;
+            tieredMaterials[7] = GTTier.values()[i].getGregTier().getMaterial();
         }
     }
 
     public WandDetails(String name, GTTier tier, ItemStack conductor) {
         this.name = name;
         this.tier = tier;
-        this.material = tieredMaterials[tier.getIndex()]; 
+        this.material = tieredMaterials[tier.getIndex()];
         this.conductor = conductor;
     }
 
