@@ -16,7 +16,7 @@ public class WandDetails {
         tieredMaterials[0] = GTTier.values()[1].getGregTier().getMaterial();
         tieredMaterials[1] = Materials.StainlessSteel;
         tieredMaterials[2] = Materials.EnergeticAlloy;
-        tieredMaterials[3] = Materials.VividAlloy;
+        tieredMaterials[3] = Materials.VibrantAlloy;
         tieredMaterials[4] = Materials.TungstenSteel;
         tieredMaterials[5] = Materials.Enderium;
         tieredMaterials[6] = Materials.Oriharukon;
