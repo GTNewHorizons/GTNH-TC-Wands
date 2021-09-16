@@ -13,25 +13,25 @@ public class WandDetails {
 
     static {
         tieredMaterials = new Materials[GTTier.values().length];
-        tieredMaterials[0] = GTTier.values()[0].getGregTier().getMaterial();
-        tieredMaterials[1] = GTTier.values()[1].getGregTier().getMaterial();
-        tieredMaterials[2] = GTTier.values()[2].getGregTier().getMaterial();
-        tieredMaterials[3] = Materials.Ultimet;
-        tieredMaterials[4] = Materials.Titanium;
-        tieredMaterials[5] = Materials.TungstenSteel;
-        tieredMaterials[6] = Materials.HSSE;
+        tieredMaterials[0] = GTTier.values()[1].getGregTier().getMaterial();
+        tieredMaterials[1] = Materials.StainlessSteel;
+        tieredMaterials[2] = Materials.EnergeticAlloy;
+        tieredMaterials[3] = Materials.VividAlloy;
+        tieredMaterials[4] = Materials.TungstenSteel;
+        tieredMaterials[5] = Materials.Enderium;
+        tieredMaterials[6] = Materials.Orharukon;
         tieredMaterials[7] = Materials.Osmiridium;
         
         //fallback for any potential new tier in the GTTier enum
         for (int i=8; i<GTTier.values().length; i++){
-            tieredMaterials[7] = GTTier.values()[i].getGregTier().getMaterial();
+            tieredMaterials[7] = GTTier.values()[i].getGregTier().getMaterial(); ;
         }
     }
 
     public WandDetails(String name, GTTier tier, ItemStack conductor) {
         this.name = name;
         this.tier = tier;
-        this.material = tier.getGregTier().getMaterial();
+        this.material = tieredMaterials[tier.getIndex()]; 
         this.conductor = conductor;
     }
 
