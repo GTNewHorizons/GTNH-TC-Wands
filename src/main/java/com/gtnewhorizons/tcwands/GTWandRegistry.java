@@ -24,7 +24,7 @@ public class GTWandRegistry implements IWandRegistry {
         new WandRecipeCreator("ice").regWandRecipe(50, 10, HV).regSceptreRecipe(1.5F).regUpwardStaffRecipe(125, 15).regStaffSceptreRecipe(1.5F);
         new WandRecipeCreator("quartz").regWandRecipe(50, 10, HV).regSceptreRecipe(1.5F).regUpwardStaffRecipe(125, 15).regStaffSceptreRecipe(1.5F);
         new WandRecipeCreator("bone").regWandRecipe(50, 10, HV).regSceptreRecipe(1.5F).regUpwardStaffRecipe(125, 15).regStaffSceptreRecipe(1.5F);
-        new WandRecipeCreator("silverwood").regWandRecipe(75, 15, EV).regSceptreRecipe(1.6).regUpwardStaffRecipe(150, 15).regStaffSceptreRecipe(1.7F);
+        new WandRecipeCreator("silverwood").regWandRecipe(75, 15, EV).regSceptreRecipe(1.6F).regUpwardStaffRecipe(150, 15).regStaffSceptreRecipe(1.75F);
         new WandRecipeCreator("primal").regStaffRecipe(175, 20, IV).regStaffSceptreRecipe(1.6F);
 
         TCWandAPI.regCap(new CapWrapper("iron", 0));
