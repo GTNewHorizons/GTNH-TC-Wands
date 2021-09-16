@@ -16,7 +16,7 @@ public class GTWandRegistry implements IWandRegistry {
 
     @Override
     public void register() {
-        new WandRecipeCreator("wood").regWandRecipe(0, 5, GT_ModHandler.getModItem("Forestry", "oakStick", 1, 0, new ItemStack(Items.stick)), GTTier.MV).regSceptreRecipe(2.0F);
+        new WandRecipeCreator("wood").regWandRecipe(0, 5, GT_ModHandler.getModItem("Forestry", "oakStick", 1, 0, new ItemStack(Items.stick)), GTTier.LV).regSceptreRecipe(2.0F);
         new WandRecipeCreator("greatwood").regWandRecipe(20, 5, MV).regSceptreRecipe(2F).regUpwardStaffRecipe(75, 15).regStaffSceptreRecipe(1.4F);
         new WandRecipeCreator("reed").regWandRecipe(60, 10, HV).regSceptreRecipe(1.5F).regUpwardStaffRecipe(125, 15).regStaffSceptreRecipe(1.5F);
         new WandRecipeCreator("blaze").regWandRecipe(60, 10, HV).regSceptreRecipe(1.5F).regUpwardStaffRecipe(125, 15).regStaffSceptreRecipe(1.5F);
