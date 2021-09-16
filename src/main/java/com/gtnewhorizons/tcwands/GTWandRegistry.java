@@ -37,9 +37,9 @@ public class GTWandRegistry implements IWandRegistry {
         if (CompatibleMods.FORBIDDEN_MAGIC.isPresent()) {
             TCWandsMod.LOGGER.info("Detected Forbidden Magic. Applying GTNH Recipes...");
             new WandRecipeCreator("profane").regWandRecipe(25, 5, HV).regSceptreRecipe(2F);
-            new WandRecipeCreator("tainted").regWandRecipe(175, 15, IV).regSceptreRecipe(1.5F);
+            new WandRecipeCreator("tainted").regWandRecipe(175, 15, IV).regSceptreRecipe(1.3F);
             new WandRecipeCreator("blood").regWandRecipe(115, 15, EV).regSceptreRecipe(1.5F).regUpwardStaffRecipe(150, 15).regStaffSceptreRecipe(1.2F);
-            new WandRecipeCreator("infernal").regWandRecipe(165, 15, IV).regSceptreRecipe(1.5F);
+            new WandRecipeCreator("infernal").regWandRecipe(165, 15, IV).regSceptreRecipe(1.35F);
             new WandRecipeCreator("livingwood").regWandRecipe(105, 15, EV).regSceptreRecipe(1.4F);
             new WandRecipeCreator("dreamwood").regWandRecipe(115, 15, EV).regSceptreRecipe(1.4F).regUpwardStaffRecipe(150, 15).regStaffSceptreRecipe(1.2F);
             new WandRecipeCreator("witchwood").regWandRecipe(115, 15, EV).regSceptreRecipe(1.4F).regUpwardStaffRecipe(150, 15).regStaffSceptreRecipe(1.2F);
@@ -81,8 +81,8 @@ public class GTWandRegistry implements IWandRegistry {
 
         if (CompatibleMods.THAUMIC_BASES.isPresent()) {
             TCWandsMod.LOGGER.info("Detected Thaumic Bases. Applying GTNH Recipes...");
-            new WandRecipeCreator("tbthaumium").regWandRecipe(60, 10, MV).regSceptreRecipe(1.5F);
-            new WandRecipeCreator("tbvoid").regWandRecipe(160, 15, HV).regSceptreRecipe(1.2F);
+            new WandRecipeCreator("tbthaumium").regWandRecipe(75, 10, HV).regSceptreRecipe(1.5F);
+            new WandRecipeCreator("tbvoid").regWandRecipe(175, 15, EV).regSceptreRecipe(1.2F);
 
             TCWandAPI.regCap(new CapWrapper("thauminite", 6));
         }
