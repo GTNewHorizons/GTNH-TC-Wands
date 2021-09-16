@@ -19,7 +19,7 @@ public class WandDetails {
         tieredMaterials[3] = Materials.VividAlloy;
         tieredMaterials[4] = Materials.TungstenSteel;
         tieredMaterials[5] = Materials.Enderium;
-        tieredMaterials[6] = Materials.Orharukon;
+        tieredMaterials[6] = Materials.Oriharukon;
         tieredMaterials[7] = Materials.Osmiridium;
 
         //fallback for any potential new tier in the GTTier enum
