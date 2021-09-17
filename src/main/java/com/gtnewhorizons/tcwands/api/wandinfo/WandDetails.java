@@ -9,11 +9,29 @@ public class WandDetails {
     private Materials material;
     private GTTier tier;
     private ItemStack conductor;
+    private static Materials[] tieredMaterials;
+
+    static {
+        tieredMaterials = new Materials[GTTier.values().length];
+        tieredMaterials[0] = GTTier.values()[1].getGregTier().getMaterial();
+        tieredMaterials[1] = Materials.StainlessSteel;
+        tieredMaterials[2] = Materials.EnergeticAlloy;
+        tieredMaterials[3] = Materials.VibrantAlloy;
+        tieredMaterials[4] = Materials.TungstenSteel;
+        tieredMaterials[5] = Materials.Enderium;
+        tieredMaterials[6] = Materials.Oriharukon;
+        tieredMaterials[7] = Materials.Osmiridium;
+
+        //fallback for any potential new tier in the GTTier enum
+        for (int i=8; i<GTTier.values().length; i++){
+            tieredMaterials[7] = GTTier.values()[i].getGregTier().getMaterial();
+        }
+    }
 
     public WandDetails(String name, GTTier tier, ItemStack conductor) {
         this.name = name;
         this.tier = tier;
-        this.material = tier.getGregTier().getMaterial();
+        this.material = tieredMaterials[tier.getIndex()];
         this.conductor = conductor;
     }
 
