@@ -24,7 +24,7 @@ public class WandDetails {
 
         //fallback for any potential new tier in the GTTier enum
         for (int i=8; i<GTTier.values().length; i++){
-            tieredMaterials[7] = GTTier.values()[i].getGregTier().getMaterial();
+            tieredMaterials[i] = GTTier.values()[i].getGregTier().getMaterial();
         }
     }
 
