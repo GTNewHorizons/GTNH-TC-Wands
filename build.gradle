@@ -7,15 +7,19 @@ buildscript {
         }
         maven {
             name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            url = "https://maven.minecraftforge.net/"
         }
         maven {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
+        maven {
+            name = "jitpack"
+            url = "https://jitpack.io"
+        }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath "com.github.GTNewHorizons:ForgeGradle:1.2.4"
     }
 }
 
@@ -45,25 +49,31 @@ minecraft {
 }
 
 repositories {
-    flatDir name: 'localRepo', dirs: [new File("maven").absolutePath]
+    ivy {  // Thaumcraft
+        name = 'gtnh_download_source'
+        artifactPattern("http://downloads.gtnewhorizons.com/Mods_for_Jenkins/[module]-[revision].[ext]")
+    }
+    maven {
+        name = "ic2"
+        url = "https://maven.ic2.player.to/"
+    }
+    maven {
+        name = "jitpack"
+        url = "https://jitpack.io"
+    }
 }
 
 dependencies {
     compile 'org.jetbrains:annotations:18.0.0'
-    compile ':gregtech:5.09.32.24'
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-
-    // real examples
-    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
+    compile 'thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev'
+    compile 'net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev'
+    compile 'com.github.GTNewHorizons:GT5-Unofficial:master-SNAPSHOT:dev'
+    compile 'com.github.GTNewHorizons:NotEnoughItems:master-SNAPSHOT:dev'
+    compile('com.github.GTNewHorizons:TCNEIAdditions:master-SNAPSHOT:dev') {
+        transitive = false
+    }
+    compile 'com.github.GTNewHorizons:twilightforest:master-SNAPSHOT:dev'
+    compile 'com.github.GTNewHorizons:Baubles:master-SNAPSHOT:dev'
 }
 
 processResources
