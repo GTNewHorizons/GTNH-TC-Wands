@@ -1,10 +1,10 @@
 [
   {
-    "modid": "gtnhtcwands",
-    "name": "GTNH-TC-Wands",
+    "modid": "${modId}",
+    "name": "${modName}",
     "description": "Adds ability to modify TC wand recipes",
-    "version": "${version}",
-    "mcversion": "${mcversion}",
+    "version": "${modVersion}",
+    "mcversion": "${minecraftVersion}",
     "url": "",
     "updateUrl": "",
     "authorList": [
