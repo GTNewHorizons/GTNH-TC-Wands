@@ -6,6 +6,4 @@ dependencies {
 
     compile('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev')
     compileOnly('org.jetbrains:annotations:23.0.0')
-
-    //runtime('com.github.GTNewHorizons:Baubles:1.0.1.14:dev')
 }
