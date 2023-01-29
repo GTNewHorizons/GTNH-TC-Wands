@@ -3,6 +3,7 @@ package com.gtnewhorizons.tcwands;
 import cpw.mods.fml.common.Loader;
 
 public enum CompatibleMods {
+
     FORBIDDEN_MAGIC("ForbiddenMagic"),
     THAUMIC_TINKERER("ThaumicTinkerer"),
     BLOOD_ARSENAL("BloodArsenal"),

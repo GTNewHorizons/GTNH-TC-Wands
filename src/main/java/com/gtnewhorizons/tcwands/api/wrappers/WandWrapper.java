@@ -1,10 +1,12 @@
 package com.gtnewhorizons.tcwands.api.wrappers;
 
+import net.minecraft.item.ItemStack;
+
+import org.jetbrains.annotations.NotNull;
+
 import com.gtnewhorizons.tcwands.api.WandType;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
-import net.minecraft.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 public class WandWrapper extends AbstractWandWrapper {
 
@@ -19,15 +21,8 @@ public class WandWrapper extends AbstractWandWrapper {
 
     @Override
     public Object[] genRecipe(CapWrapper cap) {
-        return new Object[]{
-                "MSC",
-                "SRS",
-                "CSM",
-                'R', getCraftingRod(),
-                'M', getDetails().getConductor(),
-                'S', getDetails().getScrew(),
-                'C', cap.getItem()
-        };
+        return new Object[] { "MSC", "SRS", "CSM", 'R', getCraftingRod(), 'M', getDetails().getConductor(), 'S',
+                getDetails().getScrew(), 'C', cap.getItem() };
     }
 
     @Override

@@ -1,9 +1,12 @@
 package com.gtnewhorizons.tcwands.api;
 
-import com.gtnewhorizons.tcwands.api.wrappers.AbstractWandWrapper;
-import com.gtnewhorizons.tcwands.api.wrappers.CapWrapper;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -14,11 +17,11 @@ import thaumcraft.api.wands.WandRod;
 import thaumcraft.common.lib.crafting.ArcaneSceptreRecipe;
 import thaumcraft.common.lib.crafting.ArcaneWandRecipe;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import com.gtnewhorizons.tcwands.api.wrappers.AbstractWandWrapper;
+import com.gtnewhorizons.tcwands.api.wrappers.CapWrapper;
 
 public class TCWandAPI {
+
     private static ArrayList<Object> craftingRecipes;
     private static ArrayList<IWandRegistry> registries = new ArrayList<>();
     private static ArrayList<AbstractWandWrapper> wandWrappers = new ArrayList<>();
@@ -55,16 +58,14 @@ public class TCWandAPI {
     }
 
     /**
-     * Registers the wand.
-     * Should be called from {@link IWandRegistry#register()}
+     * Registers the wand. Should be called from {@link IWandRegistry#register()}
      */
     public static void regWandWrapper(AbstractWandWrapper wandWrapper) {
         wandWrappers.add(wandWrapper);
     }
 
     /**
-     * Registers the cap.
-     * Should be called from {@link IWandRegistry#register()}
+     * Registers the cap. Should be called from {@link IWandRegistry#register()}
      */
     public static void regCap(CapWrapper cap) {
         caps.add(cap);
@@ -91,7 +92,8 @@ public class TCWandAPI {
     /**
      * Adds rod or replaces existing one. You still need to register wand recipe.
      */
-    public static void makeRod(String name, int capacity, ItemStack item, int craftCost, IWandRodOnUpdate update, boolean glowing, ResourceLocation texture) {
+    public static void makeRod(String name, int capacity, ItemStack item, int craftCost, IWandRodOnUpdate update,
+            boolean glowing, ResourceLocation texture) {
         WandRod rod = new WandRod(name, capacity, item, craftCost, texture);
         rod.setGlowing(glowing);
         if (update != null) rod.setOnUpdate(update);
@@ -102,7 +104,8 @@ public class TCWandAPI {
      *
      * @param name the name of staff. Should NOT contain '_staff' postfix, because it will be added automatically.
      */
-    public static void makeStaff(String name, int capacity, ItemStack item, int cost, IWandRodOnUpdate update, boolean glowing, ResourceLocation texture) {
+    public static void makeStaff(String name, int capacity, ItemStack item, int cost, IWandRodOnUpdate update,
+            boolean glowing, ResourceLocation texture) {
         StaffRod staff = new StaffRod(name, capacity, item, cost, texture);
         staff.setGlowing(glowing);
         if (update != null) staff.setOnUpdate(update);
@@ -113,7 +116,8 @@ public class TCWandAPI {
      *
      * @param name     name of cap
      * @param stack    the actual item that makes up this cap and will be used to generate the wand recipes
-     * @param discount amount by which all aspect costs are multiplied (if you want to provide a discount, use value between 0 and 1)
+     * @param discount amount by which all aspect costs are multiplied (if you want to provide a discount, use value
+     *                 between 0 and 1)
      * @param cost     cost to craft this wand. Combined with the rod cost.
      * @param texture  texture that will be used for the ingame wand cap
      */
@@ -127,13 +131,17 @@ public class TCWandAPI {
      *
      * @param name            name of cap
      * @param stack           the actual item that makes up this cap and will be used to generate the wand recipes
-     * @param discount        amount by which all aspect costs are multiplied (if you want to provide a discount, use value between 0 and 1)
-     * @param list            specifies a list of primal aspects that use the special discount figure instead of the normal discount
-     * @param discountSpecial amount by which the specified aspect costs are multiplied (if you want to provide a discount, use value between 0 and 1)
+     * @param discount        amount by which all aspect costs are multiplied (if you want to provide a discount, use
+     *                        value between 0 and 1)
+     * @param list            specifies a list of primal aspects that use the special discount figure instead of the
+     *                        normal discount
+     * @param discountSpecial amount by which the specified aspect costs are multiplied (if you want to provide a
+     *                        discount, use value between 0 and 1)
      * @param cost            cost to craft this wand. Combined with the rod cost.
      * @param texture         texture that will be used for the ingame wand cap
      */
-    public static void makeCap(String name, ItemStack stack, float discount, List<Aspect> list, float discountSpecial, int cost, ResourceLocation texture) {
+    public static void makeCap(String name, ItemStack stack, float discount, List<Aspect> list, float discountSpecial,
+            int cost, ResourceLocation texture) {
         WandCap cap = new WandCap(name, discount, list, discountSpecial, stack, cost);
         cap.setTexture(texture);
     }

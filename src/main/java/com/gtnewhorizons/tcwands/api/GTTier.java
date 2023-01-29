@@ -1,19 +1,21 @@
 package com.gtnewhorizons.tcwands.api;
 
-import gregtech.api.enums.Tier;
-import gregtech.api.util.GT_ModHandler;
-import net.minecraft.init.Blocks;
+import java.util.function.Supplier;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import java.util.function.Supplier;
+import gregtech.api.enums.Tier;
+import gregtech.api.util.GT_ModHandler;
 
 public enum GTTier {
+
     LV(0, () -> GT_ModHandler.getModItem("TwilightForest", "item.nagaScale", 1, 0, new ItemStack(Items.wheat))),
     MV(1, () -> GT_ModHandler.getModItem("dreamcraft", "item.LichBone", 1, 0, new ItemStack(Items.carrot))),
     HV(2, () -> GT_ModHandler.getModItem("dreamcraft", "item.LichBone", 1, 0, new ItemStack(Items.carrot))),
     EV(3, () -> GT_ModHandler.getModItem("TwilightForest", "item.fieryBlood", 1, 0, new ItemStack(Items.potato))),
-    IV(4, () -> GT_ModHandler.getModItem("TwilightForest", "item.fieryTears", 1, 0, new ItemStack(Items.poisonous_potato))),
+    IV(4, () -> GT_ModHandler
+            .getModItem("TwilightForest", "item.fieryTears", 1, 0, new ItemStack(Items.poisonous_potato))),
     LUV(5, () -> GT_ModHandler.getModItem("TwilightForest", "item.carminite", 1, 0, new ItemStack(Items.apple))),
     ZPM(6, () -> GT_ModHandler.getModItem("TwilightForest", "item.carminite", 1, 0, new ItemStack(Items.apple))),
     UV(7, () -> GT_ModHandler.getModItem("dreamcraft", "item.SnowQueenBlood", 1, 0, new ItemStack(Items.cake)));
@@ -37,7 +39,7 @@ public enum GTTier {
     }
 
     public static void init() {
-        for (GTTier tier : values()) {//is needed for optimization
+        for (GTTier tier : values()) {// is needed for optimization
             ItemStack conductor = tier.wandConductorSupplier.get();
             tier.wandConductorSupplier = () -> conductor;
         }

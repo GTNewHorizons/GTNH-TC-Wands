@@ -1,14 +1,16 @@
 package com.gtnewhorizons.tcwands.api;
 
+import net.minecraft.item.ItemStack;
+
 import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
 import com.gtnewhorizons.tcwands.api.wrappers.*;
-import net.minecraft.item.ItemStack;
 
 /**
  * This class allows to register wand recipes easier.
  */
 public class WandRecipeCreator {
+
     private String name;
     private WandDetails wandDetails = null;
     private WandDetails staffDetails = null;
@@ -19,8 +21,8 @@ public class WandRecipeCreator {
     private ItemStack customCraftingRod = null;
 
     /**
-     * @param name the name of rod material.
-     *             Shouldn't contain _staff postfix, it will be substituted automatically if you register a staff or staff-sceptre recipe.
+     * @param name the name of rod material. Shouldn't contain _staff postfix, it will be substituted automatically if
+     *             you register a staff or staff-sceptre recipe.
      */
     public WandRecipeCreator(String name) {
         this.name = name;
@@ -38,8 +40,7 @@ public class WandRecipeCreator {
     }
 
     /**
-     * Registers wand recipe with provided base, cap cost and GT tier.
-     * Conductor will be got from tier.
+     * Registers wand recipe with provided base, cap cost and GT tier. Conductor will be got from tier.
      */
     public WandRecipeCreator regWandRecipe(int baseCost, int capCost, GTTier tier) {
         return regWandRecipe(baseCost, capCost, tier, tier.getConductor());
@@ -56,8 +57,8 @@ public class WandRecipeCreator {
     }
 
     /**
-     * Registers wand recipe with provided base, cap cost, GT tier and custom crafting rod.
-     * Conductor will be got from tier.
+     * Registers wand recipe with provided base, cap cost, GT tier and custom crafting rod. Conductor will be got from
+     * tier.
      *
      * @param customCraftingRod item that will be used in wand and ALSO IN SCEPTRE recipes instead of default rod.
      */
@@ -70,7 +71,8 @@ public class WandRecipeCreator {
      *
      * @param customCraftingRod item that will be used in wand and ALSO IN SCEPTRE recipes instead of default rod.
      */
-    public WandRecipeCreator regWandRecipe(int baseCost, int capCost, ItemStack customCraftingRod, GTTier tier, ItemStack conductor) {
+    public WandRecipeCreator regWandRecipe(int baseCost, int capCost, ItemStack customCraftingRod, GTTier tier,
+            ItemStack conductor) {
         this.customCraftingRod = customCraftingRod;
         return regWandRecipe(baseCost, capCost, tier, conductor);
     }
@@ -80,7 +82,8 @@ public class WandRecipeCreator {
      */
     public WandRecipeCreator regWandDepStaffRecipe(int baseCost, int capCost) {
         if (wandDetails == null) {
-            throw new IllegalStateException("You can't use regStaffRecipe(int baseCost, int capCost) without calling regWandRecipe(...).");
+            throw new IllegalStateException(
+                    "You can't use regStaffRecipe(int baseCost, int capCost) without calling regWandRecipe(...).");
         }
 
         this.staffProps = new WandProps(baseCost, capCost);
@@ -97,8 +100,7 @@ public class WandRecipeCreator {
     }
 
     /**
-     * Register staff recipe with provided base, cap cost and GT tier.
-     * Conductor will be got from tier.
+     * Register staff recipe with provided base, cap cost and GT tier. Conductor will be got from tier.
      */
     public WandRecipeCreator regStaffRecipe(int baseCost, int capCost, GTTier tier) {
         return regStaffRecipe(baseCost, capCost, tier, tier.getConductor());
@@ -115,14 +117,15 @@ public class WandRecipeCreator {
     }
 
     /**
-     * Register sceptre recipe, where sceptre characteristics are got from registered wand.
-     * Mustn't be called before any {@link #regWandRecipe} method.
+     * Register sceptre recipe, where sceptre characteristics are got from registered wand. Mustn't be called before any
+     * {@link #regWandRecipe} method.
      *
      * @param sceptreCostMultiplier multiplier that will be applied on total recipe cost.
      */
     public WandRecipeCreator regSceptreRecipe(float sceptreCostMultiplier) {
         if (wandDetails == null || wandProps == null) {
-            throw new IllegalStateException("You can't use regSceptreRecipe(...) without calling regWandRecipe(...) method.");
+            throw new IllegalStateException(
+                    "You can't use regSceptreRecipe(...) without calling regWandRecipe(...) method.");
         }
 
         SceptreWrapper sceptreWrapper = new SceptreWrapper(wandDetails, wandProps, sceptreCostMultiplier);
@@ -131,14 +134,15 @@ public class WandRecipeCreator {
     }
 
     /**
-     * Register sceptre recipe, where sceptre characteristics are got from registered wand.
-     * Mustn't be called before any {@link #regStaffRecipe} method.
+     * Register sceptre recipe, where sceptre characteristics are got from registered wand. Mustn't be called before any
+     * {@link #regStaffRecipe} method.
      *
      * @param sceptreCostMultiplier multiplier that will be applied on total recipe cost.
      */
     public WandRecipeCreator regStaffSceptreRecipe(float sceptreCostMultiplier) {
         if (staffDetails == null || staffProps == null) {
-            throw new IllegalStateException("You can't use regStaffSceptreRecipe(...) without calling regStaffRecipe(...) method.");
+            throw new IllegalStateException(
+                    "You can't use regStaffSceptreRecipe(...) without calling regStaffRecipe(...) method.");
         }
         SceptreWrapper sceptreWrapper = new StaffSceptreWrapper(staffDetails, staffProps, sceptreCostMultiplier);
         regWandWrapper(sceptreWrapper);

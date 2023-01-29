@@ -3,6 +3,7 @@ package com.gtnewhorizons.tcwands.api.wrappers;
 import net.minecraft.item.ItemStack;
 
 public class CapWrapper {
+
     private int costMultiplier;
     private String name;
     private ItemStack itemStack;

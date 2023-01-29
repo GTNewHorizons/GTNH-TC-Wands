@@ -1,15 +1,19 @@
 package com.gtnewhorizons.tcwands.api.wrappers;
 
-import com.gtnewhorizons.tcwands.api.WandType;
-import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
-import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+
 import org.jetbrains.annotations.NotNull;
+
 import thaumcraft.api.wands.WandRod;
 import thaumcraft.common.config.ConfigItems;
 
+import com.gtnewhorizons.tcwands.api.WandType;
+import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
+import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
+
 public abstract class AbstractWandWrapper {
+
     private WandDetails wandDetails;
     private WandProps wandProps;
 
@@ -25,8 +29,9 @@ public abstract class AbstractWandWrapper {
 
         WandRod wandRod = WandRod.rods.get(getRodName());
 
-        if (wandRod == null)
-            throw new NullPointerException("Can't find provided wand rod with id: " + getRodName() + ". Be careful to register your custom rod before creating recipes.");
+        if (wandRod == null) throw new NullPointerException(
+                "Can't find provided wand rod with id: " + getRodName()
+                        + ". Be careful to register your custom rod before creating recipes.");
 
         this.craftingRod = wandRod.getItem();
     }

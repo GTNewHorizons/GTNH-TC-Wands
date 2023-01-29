@@ -1,10 +1,12 @@
 package com.gtnewhorizons.tcwands.api.wandinfo;
 
-import com.gtnewhorizons.tcwands.api.GTTier;
-import gregtech.api.enums.Materials;
 import net.minecraft.item.ItemStack;
 
+import com.gtnewhorizons.tcwands.api.GTTier;
+import gregtech.api.enums.Materials;
+
 public class WandDetails {
+
     private String name;
     private Materials material;
     private GTTier tier;
@@ -22,8 +24,8 @@ public class WandDetails {
         tieredMaterials[6] = Materials.Oriharukon;
         tieredMaterials[7] = Materials.Osmiridium;
 
-        //fallback for any potential new tier in the GTTier enum
-        for (int i=8; i<GTTier.values().length; i++){
+        // fallback for any potential new tier in the GTTier enum
+        for (int i = 8; i < GTTier.values().length; i++) {
             tieredMaterials[i] = GTTier.values()[i].getGregTier().getMaterial();
         }
     }
@@ -52,6 +54,6 @@ public class WandDetails {
     }
 
     public String getScrew() {
-        return "screw" + material.mName;//FIXME check
+        return "screw" + material.mName;// FIXME check
     }
 }
