@@ -28,7 +28,8 @@ public class TCWandsMod {
             + "after:BloodArsenal;"
             + "after:thaumicbases;"
             + "after:ThaumicExploration;"
-            + "after:ThaumicTinkerer;";
+            + "after:ThaumicTinkerer;"
+            + "after:ChromatiCraft;";
 
     public static final Logger LOGGER = LogManager.getLogger(NAME);
     @Mod.Instance

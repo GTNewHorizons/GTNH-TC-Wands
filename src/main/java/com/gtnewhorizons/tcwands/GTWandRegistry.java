@@ -127,5 +127,15 @@ public class GTWandRegistry implements IWandRegistry {
             TCWandAPI.regCap(new CapWrapper("SOJOURNER", 5));
             TCWandAPI.regCap(new CapWrapper("MECHANIST", 5));
         }
+
+        if (CompatibleMods.CHROMATICRAFT.isPresent()) {
+            TCWandsMod.LOGGER.info("Detected ChromatiCraft. Applying GTNH Recipes...");
+            new WandRecipeCreator("CRYSTALWAND").regWandRecipe(300, 30, UV).regSceptreRecipe(2.7F);
+
+            TCWandAPI.regCap(new CapWrapper("TIEREDCAP_FOCAL", 10));
+            TCWandAPI.regCap(new CapWrapper("TIEREDCAP_FIRAXITE", 5));
+            TCWandAPI.regCap(new CapWrapper("TIEREDCAP_WATERY", 5));
+            TCWandAPI.regCap(new CapWrapper("TIEREDCAP_RESO", 5));
+        }
     }
 }

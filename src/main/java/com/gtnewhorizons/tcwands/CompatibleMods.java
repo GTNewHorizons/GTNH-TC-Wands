@@ -9,7 +9,8 @@ public enum CompatibleMods {
     BLOOD_ARSENAL("BloodArsenal"),
     TAINTED_MAGIC("TaintedMagic"),
     THAUMIC_BASES("thaumicbases"),
-    THAUMIC_EXPLORATION("ThaumicExploration");
+    THAUMIC_EXPLORATION("ThaumicExploration"),
+    CHROMATICRAFT("ChromatiCraft");
 
     private String modID;
 
