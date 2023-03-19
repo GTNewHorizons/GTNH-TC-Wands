@@ -28,7 +28,9 @@ public class TCWandsMod {
             + "after:BloodArsenal;"
             + "after:thaumicbases;"
             + "after:ThaumicExploration;"
-            + "after:ThaumicTinkerer;";
+            + "after:ThaumicTinkerer;"
+            + "after:ChromatiCraft;";
+            /** ChromatiCraft is non-supported content. if this ever errors out in some way feel free to remove this.*/
 
     public static final Logger LOGGER = LogManager.getLogger(NAME);
     @Mod.Instance
