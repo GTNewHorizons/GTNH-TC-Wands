@@ -128,6 +128,7 @@ public class GTWandRegistry implements IWandRegistry {
             TCWandAPI.regCap(new CapWrapper("MECHANIST", 5));
         }
 
+        /** ChromatiCraft is non-supported content. if this ever errors out in some way feel free to remove this.*/
         if (CompatibleMods.CHROMATICRAFT.isPresent()) {
             TCWandsMod.LOGGER.info("Detected ChromatiCraft. Applying GTNH Recipes...");
             new WandRecipeCreator("CRYSTALWAND").regWandRecipe(300, 30, UV).regSceptreRecipe(2.7F);

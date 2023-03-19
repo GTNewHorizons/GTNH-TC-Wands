@@ -11,6 +11,7 @@ public enum CompatibleMods {
     THAUMIC_BASES("thaumicbases"),
     THAUMIC_EXPLORATION("ThaumicExploration"),
     CHROMATICRAFT("ChromatiCraft");
+	/** ChromatiCraft is non-supported content. if this ever errors out in some way feel free to remove this.*/
 
     private String modID;
 

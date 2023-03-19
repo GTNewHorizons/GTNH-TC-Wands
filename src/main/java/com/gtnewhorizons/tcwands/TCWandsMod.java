@@ -30,6 +30,7 @@ public class TCWandsMod {
             + "after:ThaumicExploration;"
             + "after:ThaumicTinkerer;"
             + "after:ChromatiCraft;";
+			/** ChromatiCraft is non-supported content. if this ever errors out in some way feel free to remove this.*/
 
     public static final Logger LOGGER = LogManager.getLogger(NAME);
     @Mod.Instance
