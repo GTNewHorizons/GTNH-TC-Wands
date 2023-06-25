@@ -11,6 +11,7 @@ import com.gtnewhorizons.tcwands.api.IWandRegistry;
 import com.gtnewhorizons.tcwands.api.TCWandAPI;
 import com.gtnewhorizons.tcwands.api.WandRecipeCreator;
 import com.gtnewhorizons.tcwands.api.wrappers.CapWrapper;
+
 import gregtech.api.util.GT_ModHandler;
 
 public class GTWandRegistry implements IWandRegistry {

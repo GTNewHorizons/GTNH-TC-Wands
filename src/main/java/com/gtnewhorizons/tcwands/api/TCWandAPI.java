@@ -7,6 +7,9 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+import com.gtnewhorizons.tcwands.api.wrappers.AbstractWandWrapper;
+import com.gtnewhorizons.tcwands.api.wrappers.CapWrapper;
+
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -16,9 +19,6 @@ import thaumcraft.api.wands.WandCap;
 import thaumcraft.api.wands.WandRod;
 import thaumcraft.common.lib.crafting.ArcaneSceptreRecipe;
 import thaumcraft.common.lib.crafting.ArcaneWandRecipe;
-
-import com.gtnewhorizons.tcwands.api.wrappers.AbstractWandWrapper;
-import com.gtnewhorizons.tcwands.api.wrappers.CapWrapper;
 
 public class TCWandAPI {
 

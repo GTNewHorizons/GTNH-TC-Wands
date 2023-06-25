@@ -3,6 +3,7 @@ package com.gtnewhorizons.tcwands.api.wandinfo;
 import net.minecraft.item.ItemStack;
 
 import com.gtnewhorizons.tcwands.api.GTTier;
+
 import gregtech.api.enums.Materials;
 
 public class WandDetails {

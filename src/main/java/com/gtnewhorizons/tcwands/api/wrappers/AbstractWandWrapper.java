@@ -5,12 +5,12 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import org.jetbrains.annotations.NotNull;
 
-import thaumcraft.api.wands.WandRod;
-import thaumcraft.common.config.ConfigItems;
-
 import com.gtnewhorizons.tcwands.api.WandType;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
+
+import thaumcraft.api.wands.WandRod;
+import thaumcraft.common.config.ConfigItems;
 
 public abstract class AbstractWandWrapper {
 
