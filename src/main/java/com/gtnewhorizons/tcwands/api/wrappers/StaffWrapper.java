@@ -4,11 +4,11 @@ import net.minecraft.item.ItemStack;
 
 import org.jetbrains.annotations.NotNull;
 
-import thaumcraft.common.config.ConfigItems;
-
 import com.gtnewhorizons.tcwands.api.WandType;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
+
+import thaumcraft.common.config.ConfigItems;
 
 public class StaffWrapper extends AbstractWandWrapper {
 
@@ -31,7 +31,7 @@ public class StaffWrapper extends AbstractWandWrapper {
 
     @Override
     public String getDefaultResearchName() {
-        return "ROD_" + getDetails().getName();
+        return "ROD_greatwood_staff";
     }
 
     @Override

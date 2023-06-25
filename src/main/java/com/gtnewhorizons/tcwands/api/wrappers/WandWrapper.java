@@ -27,7 +27,7 @@ public class WandWrapper extends AbstractWandWrapper {
 
     @Override
     public String getDefaultResearchName() {
-        return "ROD_" + getDetails().getName();
+        return "BASICTHAUMATURGY";
     }
 
     @Override
