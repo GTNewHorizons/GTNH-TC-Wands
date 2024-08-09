@@ -1,7 +1,5 @@
 package com.gtnewhorizons.tcwands.api;
 
-import static gregtech.api.util.GT_RecipeBuilder.WILDCARD;
-
 import java.util.function.Supplier;
 
 import net.minecraft.init.Items;
