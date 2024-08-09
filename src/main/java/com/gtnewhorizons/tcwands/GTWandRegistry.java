@@ -22,24 +22,24 @@ public class GTWandRegistry implements IWandRegistry {
                 0,
                 5,
                 GT_ModHandler.getModItem("Forestry", "oakStick", 1, 0, new ItemStack(Items.stick)),
-                GTTier.LV).regSceptreRecipe(2.0F);
-        new WandRecipeCreator("greatwood").regWandRecipe(20, 5, MV).regSceptreRecipe(2F).regUpwardStaffRecipe(75, 15)
+                GTTier.STEAM).regSceptreRecipe(2.0F);
+        new WandRecipeCreator("greatwood").regWandRecipe(20, 5, LV).regSceptreRecipe(2F).regUpwardStaffRecipe(75, 15)
                 .regStaffSceptreRecipe(1.4F);
-        new WandRecipeCreator("reed").regWandRecipe(60, 10, HV).regSceptreRecipe(1.4F).regUpwardStaffRecipe(125, 15)
+        new WandRecipeCreator("reed").regWandRecipe(60, 10, MV).regSceptreRecipe(1.4F).regUpwardStaffRecipe(125, 15)
                 .regStaffSceptreRecipe(1.5F);
-        new WandRecipeCreator("blaze").regWandRecipe(60, 10, HV).regSceptreRecipe(1.4F).regUpwardStaffRecipe(125, 15)
+        new WandRecipeCreator("blaze").regWandRecipe(60, 10, MV).regSceptreRecipe(1.4F).regUpwardStaffRecipe(125, 15)
                 .regStaffSceptreRecipe(1.5F);
-        new WandRecipeCreator("obsidian").regWandRecipe(60, 10, HV).regSceptreRecipe(1.4F).regUpwardStaffRecipe(125, 15)
+        new WandRecipeCreator("obsidian").regWandRecipe(60, 10, MV).regSceptreRecipe(1.4F).regUpwardStaffRecipe(125, 15)
                 .regStaffSceptreRecipe(1.5F);
-        new WandRecipeCreator("ice").regWandRecipe(60, 10, HV).regSceptreRecipe(1.4F).regUpwardStaffRecipe(125, 15)
+        new WandRecipeCreator("ice").regWandRecipe(60, 10, MV).regSceptreRecipe(1.4F).regUpwardStaffRecipe(125, 15)
                 .regStaffSceptreRecipe(1.5F);
-        new WandRecipeCreator("quartz").regWandRecipe(60, 10, HV).regSceptreRecipe(1.4F).regUpwardStaffRecipe(125, 15)
+        new WandRecipeCreator("quartz").regWandRecipe(60, 10, MV).regSceptreRecipe(1.4F).regUpwardStaffRecipe(125, 15)
                 .regStaffSceptreRecipe(1.5F);
-        new WandRecipeCreator("bone").regWandRecipe(60, 10, HV).regSceptreRecipe(1.4F).regUpwardStaffRecipe(125, 15)
+        new WandRecipeCreator("bone").regWandRecipe(60, 10, MV).regSceptreRecipe(1.4F).regUpwardStaffRecipe(125, 15)
                 .regStaffSceptreRecipe(1.5F);
-        new WandRecipeCreator("silverwood").regWandRecipe(115, 15, EV).regSceptreRecipe(1.25F)
+        new WandRecipeCreator("silverwood").regWandRecipe(115, 15, HV).regSceptreRecipe(1.25F)
                 .regUpwardStaffRecipe(165, 15).regStaffSceptreRecipe(1.75F);
-        new WandRecipeCreator("primal").regStaffRecipe(175, 20, IV).regStaffSceptreRecipe(1.25F);
+        new WandRecipeCreator("primal").regStaffRecipe(175, 20, EV).regStaffSceptreRecipe(1.25F);
 
         TCWandAPI.regCap(new CapWrapper("iron", 0));
         TCWandAPI.regCap(new CapWrapper("copper", 1));
@@ -50,15 +50,15 @@ public class GTWandRegistry implements IWandRegistry {
 
         if (CompatibleMods.FORBIDDEN_MAGIC.isPresent()) {
             TCWandsMod.LOGGER.info("Detected Forbidden Magic. Applying GTNH Recipes...");
-            new WandRecipeCreator("profane").regWandRecipe(25, 5, HV).regSceptreRecipe(2F);
-            new WandRecipeCreator("tainted").regWandRecipe(175, 15, IV).regSceptreRecipe(1.4F);
-            new WandRecipeCreator("blood").regWandRecipe(115, 15, EV).regSceptreRecipe(1.35F)
+            new WandRecipeCreator("profane").regWandRecipe(25, 5, MV).regSceptreRecipe(2F);
+            new WandRecipeCreator("tainted").regWandRecipe(175, 15, EV).regSceptreRecipe(1.4F);
+            new WandRecipeCreator("blood").regWandRecipe(115, 15, HV).regSceptreRecipe(1.35F)
                     .regUpwardStaffRecipe(150, 15).regStaffSceptreRecipe(1.2F);
-            new WandRecipeCreator("infernal").regWandRecipe(165, 15, IV).regSceptreRecipe(1.35F);
-            new WandRecipeCreator("livingwood").regWandRecipe(105, 15, EV).regSceptreRecipe(1.35F);
-            new WandRecipeCreator("dreamwood").regWandRecipe(115, 15, EV).regSceptreRecipe(1.3F)
+            new WandRecipeCreator("infernal").regWandRecipe(165, 15, EV).regSceptreRecipe(1.35F);
+            new WandRecipeCreator("livingwood").regWandRecipe(105, 15, HV).regSceptreRecipe(1.35F);
+            new WandRecipeCreator("dreamwood").regWandRecipe(115, 15, HV).regSceptreRecipe(1.3F)
                     .regUpwardStaffRecipe(150, 15).regStaffSceptreRecipe(1.2F);
-            new WandRecipeCreator("witchwood").regWandRecipe(115, 15, EV).regSceptreRecipe(1.3F)
+            new WandRecipeCreator("witchwood").regWandRecipe(115, 15, HV).regSceptreRecipe(1.3F)
                     .regUpwardStaffRecipe(150, 15).regStaffSceptreRecipe(1.2F);
 
             TCWandAPI.regCap(new CapWrapper("manasteel", 5));
@@ -70,14 +70,14 @@ public class GTWandRegistry implements IWandRegistry {
 
         if (CompatibleMods.THAUMIC_TINKERER.isPresent()) {
             TCWandsMod.LOGGER.info("Detected Thaumic Tinkerer. Applying GTNH Recipes...");
-            new WandRecipeCreator("ICHORCLOTH").regWandRecipe(250, 25, UV).regSceptreRecipe(1.25F);
+            new WandRecipeCreator("ICHORCLOTH").regWandRecipe(250, 25, IV).regSceptreRecipe(1.25F);
 
             TCWandAPI.regCap(new CapWrapper("ICHOR", 8));
         }
 
         if (CompatibleMods.BLOOD_ARSENAL.isPresent()) {
             TCWandsMod.LOGGER.info("Detected Blood Arsenal. Applying GTNH Recipes...");
-            new WandRecipeCreator("blood_wood").regWandRecipe(110, 15, EV).regSceptreRecipe(1.2F)
+            new WandRecipeCreator("blood_wood").regWandRecipe(110, 15, HV).regSceptreRecipe(1.2F)
                     .regUpwardStaffRecipe(145, 20).regStaffSceptreRecipe(1.6F);
 
             TCWandAPI.regCap(new CapWrapper("blood_iron", 6));
@@ -99,7 +99,7 @@ public class GTWandRegistry implements IWandRegistry {
                     9,
                     new ResourceLocation("taintedmagic", "textures/models/ModelWAND_CAP_CRIMSON_CLOTH.png"));
 
-            new WandRecipeCreator("warpwood").regWandRecipe(190, 15, LUV).regSceptreRecipe(1.2F)
+            new WandRecipeCreator("warpwood").regWandRecipe(190, 15, IV).regSceptreRecipe(1.2F)
                     .regUpwardStaffRecipe(220, 25).regStaffSceptreRecipe(1.2F);
 
             TCWandAPI.regCap(new CapWrapper("cloth", 3));
@@ -110,17 +110,17 @@ public class GTWandRegistry implements IWandRegistry {
 
         if (CompatibleMods.THAUMIC_BASES.isPresent()) {
             TCWandsMod.LOGGER.info("Detected Thaumic Bases. Applying GTNH Recipes...");
-            new WandRecipeCreator("tbthaumium").regWandRecipe(75, 10, HV).regSceptreRecipe(1.5F);
-            new WandRecipeCreator("tbvoid").regWandRecipe(175, 15, EV).regSceptreRecipe(1.2F);
+            new WandRecipeCreator("tbthaumium").regWandRecipe(75, 10, MV).regSceptreRecipe(1.5F);
+            new WandRecipeCreator("tbvoid").regWandRecipe(175, 15, HV).regSceptreRecipe(1.2F);
 
             TCWandAPI.regCap(new CapWrapper("thauminite", 6));
         }
 
         if (CompatibleMods.THAUMIC_EXPLORATION.isPresent()) {
             TCWandsMod.LOGGER.info("Detected Thaumic Exploration. Applying GTNH Recipes...");
-            new WandRecipeCreator("AMBER").regWandRecipe(20, 5, MV).regSceptreRecipe(2F).regUpwardStaffRecipe(75, 15)
+            new WandRecipeCreator("AMBER").regWandRecipe(20, 5, LV).regSceptreRecipe(2F).regUpwardStaffRecipe(75, 15)
                     .regStaffSceptreRecipe(1.4F);
-            new WandRecipeCreator("TRANSMUTATION").regWandRecipe(50, 10, HV).regSceptreRecipe(1.5F)
+            new WandRecipeCreator("TRANSMUTATION").regWandRecipe(50, 10, MV).regSceptreRecipe(1.5F)
                     .regUpwardStaffRecipe(125, 15).regStaffSceptreRecipe(1.5F);
             // FIXME where's NECROMANCER
             // cores.add(new WandCore("BREAD",HV, LICH, 20, 5, 2F));//FIXME need or not need?
@@ -132,7 +132,7 @@ public class GTWandRegistry implements IWandRegistry {
         /** ChromatiCraft is non-supported content. if this ever errors out in some way feel free to remove this. */
         if (CompatibleMods.CHROMATICRAFT.isPresent()) {
             TCWandsMod.LOGGER.info("Detected ChromatiCraft. Applying GTNH Recipes...");
-            new WandRecipeCreator("CRYSTALWAND").regWandRecipe(300, 30, UV).regSceptreRecipe(2.7F);
+            new WandRecipeCreator("CRYSTALWAND").regWandRecipe(300, 30, IV).regSceptreRecipe(2.7F);
 
             TCWandAPI.regCap(new CapWrapper("TIEREDCAP_FOCAL", 10));
             TCWandAPI.regCap(new CapWrapper("TIEREDCAP_FIRAXITE", 5));

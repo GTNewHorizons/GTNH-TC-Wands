@@ -7,9 +7,11 @@ import net.minecraft.item.ItemStack;
 
 import gregtech.api.enums.Tier;
 import gregtech.api.util.GT_ModHandler;
+import thaumcraft.common.config.ConfigItems;
 
 public enum GTTier {
 
+    STEAM(-1, () -> new ItemStack(ConfigItems.itemResource, 1, 14)),
     LV(0, () -> GT_ModHandler.getModItem("TwilightForest", "item.nagaScale", 1, 0, new ItemStack(Items.wheat))),
     MV(1, () -> GT_ModHandler.getModItem("dreamcraft", "item.LichBone", 1, 0, new ItemStack(Items.carrot))),
     HV(2, () -> GT_ModHandler.getModItem("dreamcraft", "item.LichBone", 1, 0, new ItemStack(Items.carrot))),
