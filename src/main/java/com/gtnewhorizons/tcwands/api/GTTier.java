@@ -1,5 +1,7 @@
 package com.gtnewhorizons.tcwands.api;
 
+import static gregtech.api.util.GT_RecipeBuilder.WILDCARD;
+
 import java.util.function.Supplier;
 
 import net.minecraft.init.Items;
@@ -8,8 +10,6 @@ import net.minecraft.item.ItemStack;
 import gregtech.api.enums.Tier;
 import gregtech.api.util.GT_ModHandler;
 import thaumcraft.common.config.ConfigItems;
-
-import static gregtech.api.util.GT_RecipeBuilder.WILDCARD;
 
 public enum GTTier {
 
