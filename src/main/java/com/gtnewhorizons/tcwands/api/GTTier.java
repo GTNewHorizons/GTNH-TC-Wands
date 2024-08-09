@@ -13,16 +13,16 @@ import thaumcraft.common.config.ConfigItems;
 
 public enum GTTier {
 
-    STEAM(-1, () -> new ItemStack(ConfigItems.itemShard, 1, 32767)),
-    LV(0, () -> GT_ModHandler.getModItem("TwilightForest", "item.nagaScale", 1, 0, new ItemStack(Items.wheat))),
-    MV(1, () -> GT_ModHandler.getModItem("dreamcraft", "item.LichBone", 1, 0, new ItemStack(Items.carrot))),
-    HV(2, () -> GT_ModHandler.getModItem("dreamcraft", "item.LichBone", 1, 0, new ItemStack(Items.carrot))),
-    EV(3, () -> GT_ModHandler.getModItem("TwilightForest", "item.fieryBlood", 1, 0, new ItemStack(Items.potato))),
-    IV(4, () -> GT_ModHandler
+    STEAM(0, () -> new ItemStack(ConfigItems.itemShard, 1, 32767)),
+    LV(1, () -> GT_ModHandler.getModItem("TwilightForest", "item.nagaScale", 1, 0, new ItemStack(Items.wheat))),
+    MV(2, () -> GT_ModHandler.getModItem("dreamcraft", "item.LichBone", 1, 0, new ItemStack(Items.carrot))),
+    HV(3, () -> GT_ModHandler.getModItem("dreamcraft", "item.LichBone", 1, 0, new ItemStack(Items.carrot))),
+    EV(4, () -> GT_ModHandler.getModItem("TwilightForest", "item.fieryBlood", 1, 0, new ItemStack(Items.potato))),
+    IV(5, () -> GT_ModHandler
             .getModItem("TwilightForest", "item.fieryTears", 1, 0, new ItemStack(Items.poisonous_potato))),
-    LUV(5, () -> GT_ModHandler.getModItem("TwilightForest", "item.carminite", 1, 0, new ItemStack(Items.apple))),
-    ZPM(6, () -> GT_ModHandler.getModItem("TwilightForest", "item.carminite", 1, 0, new ItemStack(Items.apple))),
-    UV(7, () -> GT_ModHandler.getModItem("dreamcraft", "item.SnowQueenBlood", 1, 0, new ItemStack(Items.cake)));
+    LUV(6, () -> GT_ModHandler.getModItem("TwilightForest", "item.carminite", 1, 0, new ItemStack(Items.apple))),
+    ZPM(7, () -> GT_ModHandler.getModItem("TwilightForest", "item.carminite", 1, 0, new ItemStack(Items.apple))),
+    UV(8, () -> GT_ModHandler.getModItem("dreamcraft", "item.SnowQueenBlood", 1, 0, new ItemStack(Items.cake)));
 
     private static final GTTier[] tiers;
 
