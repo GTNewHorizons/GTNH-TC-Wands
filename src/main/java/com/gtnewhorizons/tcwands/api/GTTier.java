@@ -13,7 +13,7 @@ import static gregtech.api.util.GT_RecipeBuilder.WILDCARD;
 
 public enum GTTier {
 
-    STEAM(-1, () -> new ItemStack(ConfigItems.itemShard, 1, WILDCARD)),
+    STEAM(-1, () -> new ItemStack(ConfigItems.itemShard, 1, 32767)),
     LV(0, () -> GT_ModHandler.getModItem("TwilightForest", "item.nagaScale", 1, 0, new ItemStack(Items.wheat))),
     MV(1, () -> GT_ModHandler.getModItem("dreamcraft", "item.LichBone", 1, 0, new ItemStack(Items.carrot))),
     HV(2, () -> GT_ModHandler.getModItem("dreamcraft", "item.LichBone", 1, 0, new ItemStack(Items.carrot))),
