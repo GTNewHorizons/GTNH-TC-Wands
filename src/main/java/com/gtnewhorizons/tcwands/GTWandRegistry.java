@@ -12,7 +12,7 @@ import com.gtnewhorizons.tcwands.api.TCWandAPI;
 import com.gtnewhorizons.tcwands.api.WandRecipeCreator;
 import com.gtnewhorizons.tcwands.api.wrappers.CapWrapper;
 
-import gregtech.api.util.GT_ModHandler;
+import gregtech.api.util.GTModHandler;
 
 public class GTWandRegistry implements IWandRegistry {
 
@@ -21,7 +21,7 @@ public class GTWandRegistry implements IWandRegistry {
         new WandRecipeCreator("wood").regWandRecipe(
                 0,
                 5,
-                GT_ModHandler.getModItem("Forestry", "oakStick", 1, 0, new ItemStack(Items.stick)),
+                GTModHandler.getModItem("Forestry", "oakStick", 1, 0, new ItemStack(Items.stick)),
                 GTTier.LV).regSceptreRecipe(2.0F);
         new WandRecipeCreator("greatwood").regWandRecipe(20, 5, MV).regSceptreRecipe(2F).regUpwardStaffRecipe(75, 15)
                 .regStaffSceptreRecipe(1.4F);
@@ -88,13 +88,13 @@ public class GTWandRegistry implements IWandRegistry {
             // Override Tainted Magic Caps
             TCWandAPI.makeCap(
                     "shadowcloth",
-                    GT_ModHandler.getModItem("TaintedMagic", "ItemWandCap", 1, 3),
+                    GTModHandler.getModItem("TaintedMagic", "ItemWandCap", 1, 3),
                     0.85F,
                     7,
                     new ResourceLocation("taintedmagic", "textures/models/ModelWAND_CAP_SHADOW_CLOTH.png"));
             TCWandAPI.makeCap(
                     "crimsoncloth",
-                    GT_ModHandler.getModItem("TaintedMagic", "ItemWandCap", 1, 2),
+                    GTModHandler.getModItem("TaintedMagic", "ItemWandCap", 1, 2),
                     0.80F,
                     9,
                     new ResourceLocation("taintedmagic", "textures/models/ModelWAND_CAP_CRIMSON_CLOTH.png"));
