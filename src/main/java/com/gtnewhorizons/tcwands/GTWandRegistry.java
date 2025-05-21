@@ -122,8 +122,7 @@ public class GTWandRegistry implements IWandRegistry {
                     .regStaffSceptreRecipe(1.4F);
             new WandRecipeCreator("TRANSMUTATION").regWandRecipe(50, 10, HV).regSceptreRecipe(1.5F)
                     .regUpwardStaffRecipe(125, 15).regStaffSceptreRecipe(1.5F);
-            // FIXME where's NECROMANCER
-            // cores.add(new WandCore("BREAD",HV, LICH, 20, 5, 2F));//FIXME need or not need?
+            new WandRecipeCreator("NECROMANCER").regStaffRecipe(150, 15, EV).regStaffSceptreRecipe(1.5F);
 
             TCWandAPI.regCap(new CapWrapper("SOJOURNER", 5));
             TCWandAPI.regCap(new CapWrapper("MECHANIST", 5));
