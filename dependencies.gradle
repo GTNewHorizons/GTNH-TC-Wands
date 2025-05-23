@@ -9,4 +9,22 @@ dependencies {
 
     runtimeOnly('com.github.GTNewHorizons:TCNEIAdditions:1.5.0:dev')
     runtimeOnly('curse.maven:thaumcraft-nei-plugin-225095:2241913')
+
+//    devOnlyNonPublishable('com.github.GTNewHorizons:ForbiddenMagic:0.8.0-GTNH:dev')
+//    devOnlyNonPublishable('com.github.GTNewHorizons:ThaumicTinkerer:2.11.12:dev')
+//    devOnlyNonPublishable('com.github.GTNewHorizons:BloodArsenal:1.4.3:dev')
+//    devOnlyNonPublishable('com.github.GTNewHorizons:Tainted-Magic:7.6.19-GTNH:dev')
+//    devOnlyNonPublishable('com.github.GTNewHorizons:ThaumicBases:1.8.7:dev')
+//    devOnlyNonPublishable('com.github.GTNewHorizons:Thaumic_Exploration:1.4.0-GTNH:dev')
+
+    // Replace Baubles
+    project.getConfigurations()
+            .all(c -> {
+                final DependencySubstitutions ds = c.getResolutionStrategy()
+                        .getDependencySubstitution();
+                ds.substitute(ds.module("com.github.GTNewHorizons:Baubles"))
+                        .using(ds.module("com.github.GTNewHorizons:Baubles-Expanded:2.1.7-GTNH"))
+                        .withClassifier("dev")
+                        .because("Baubles-Expanded replaces Baubles");
+            })
 }
