@@ -148,4 +148,12 @@ public class TCWandAPI {
     private static void removeTCWands() {
         craftingRecipes.removeIf(r -> r instanceof ArcaneWandRecipe || r instanceof ArcaneSceptreRecipe);
     }
+
+    public static ArrayList<CapWrapper> getCaps() {
+        return caps;
+    }
+
+    public static ArrayList<AbstractWandWrapper> getWandWrappers() {
+        return wandWrappers;
+    }
 }
