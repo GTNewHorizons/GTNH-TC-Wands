@@ -23,9 +23,9 @@ import thaumcraft.common.lib.crafting.ArcaneWandRecipe;
 public class TCWandAPI {
 
     private static ArrayList<Object> craftingRecipes;
-    private static ArrayList<IWandRegistry> registries = new ArrayList<>();
-    private static ArrayList<AbstractWandWrapper> wandWrappers = new ArrayList<>();
-    private static ArrayList<CapWrapper> caps = new ArrayList<>();
+    private static final ArrayList<IWandRegistry> registries = new ArrayList<>();
+    private static final ArrayList<AbstractWandWrapper> wandWrappers = new ArrayList<>();
+    private static final ArrayList<CapWrapper> caps = new ArrayList<>();
 
     static {
         try {
@@ -54,7 +54,6 @@ public class TCWandAPI {
         }
 
         makeWands();
-        dispose();
     }
 
     /**
@@ -148,11 +147,5 @@ public class TCWandAPI {
 
     private static void removeTCWands() {
         craftingRecipes.removeIf(r -> r instanceof ArcaneWandRecipe || r instanceof ArcaneSceptreRecipe);
-    }
-
-    private static void dispose() {
-        registries = null;
-        wandWrappers = null;
-        caps = null;
     }
 }
