@@ -24,9 +24,9 @@ public enum GTTier {
     private static final GTTier[] tiers;
 
     static {
-        tiers = new GTTier[values().length];
-        for (int i = 0; i < values().length; i++) {
-            GTTier tier = values()[i];
+        final GTTier[] values = values();
+        tiers = new GTTier[values.length];
+        for (GTTier tier : values) {
             tiers[tier.getIndex()] = tier;
         }
     }
