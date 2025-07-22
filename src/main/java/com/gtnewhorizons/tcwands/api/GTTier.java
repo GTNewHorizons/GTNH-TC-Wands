@@ -5,7 +5,6 @@ import java.util.function.Supplier;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import gregtech.api.enums.Tier;
 import gregtech.api.util.GTModHandler;
 
 public enum GTTier {
@@ -47,10 +46,6 @@ public enum GTTier {
 
     public int getIndex() {
         return index;
-    }
-
-    public Tier getGregTier() {
-        return Tier.ELECTRIC[getIndex() + 1];
     }
 
     public ItemStack getConductor() {

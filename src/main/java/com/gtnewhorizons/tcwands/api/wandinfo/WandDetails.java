@@ -16,7 +16,7 @@ public class WandDetails {
 
     static {
         tieredMaterials = new Materials[GTTier.values().length];
-        tieredMaterials[0] = GTTier.values()[1].getGregTier().getMaterial();
+        tieredMaterials[0] = Materials.Aluminium;
         tieredMaterials[1] = Materials.StainlessSteel;
         tieredMaterials[2] = Materials.EnergeticAlloy;
         tieredMaterials[3] = Materials.VibrantAlloy;
@@ -27,7 +27,7 @@ public class WandDetails {
 
         // fallback for any potential new tier in the GTTier enum
         for (int i = 8; i < GTTier.values().length; i++) {
-            tieredMaterials[i] = GTTier.values()[i].getGregTier().getMaterial();
+            tieredMaterials[i] = Materials.Neutronium;
         }
     }
 
