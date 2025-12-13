@@ -9,10 +9,7 @@ public enum CompatibleMods {
     BLOOD_ARSENAL("BloodArsenal"),
     TAINTED_MAGIC("TaintedMagic"),
     THAUMIC_BASES("thaumicbases"),
-    THAUMIC_EXPLORATION("ThaumicExploration"),
-    CHROMATICRAFT("ChromatiCraft");
-
-    /** ChromatiCraft is non-supported content. if this ever errors out in some way feel free to remove this. */
+    THAUMIC_EXPLORATION("ThaumicExploration");
 
     private String modID;
 
