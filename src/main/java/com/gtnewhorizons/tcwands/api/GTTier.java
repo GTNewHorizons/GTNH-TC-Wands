@@ -12,13 +12,13 @@ public enum GTTier {
 
     // spotless:off
     LV(0, Materials.Aluminium,() -> GTModHandler.getModItem("TwilightForest", "item.nagaScale", 1, 0, new ItemStack(Items.wheat))),
-    MV(1, Materials.StainlessSteel,() -> GTModHandler.getModItem("dreamcraft", "item.LichBone", 1, 0, new ItemStack(Items.carrot))),
-    HV(2, Materials.EnergeticAlloy,() -> GTModHandler.getModItem("dreamcraft", "item.LichBone", 1, 0, new ItemStack(Items.carrot))),
+    MV(1, Materials.StainlessSteel,() -> GTModHandler.getModItem("dreamcraft", "LichBone", 1, 0, new ItemStack(Items.carrot))),
+    HV(2, Materials.EnergeticAlloy,() -> GTModHandler.getModItem("dreamcraft", "LichBone", 1, 0, new ItemStack(Items.carrot))),
     EV(3, Materials.VibrantAlloy,() -> GTModHandler.getModItem("TwilightForest", "item.fieryBlood", 1, 0, new ItemStack(Items.potato))),
     IV(4, Materials.TungstenSteel,() -> GTModHandler.getModItem("TwilightForest", "item.fieryTears", 1, 0, new ItemStack(Items.poisonous_potato))),
     LUV(5,Materials.Enderium, () -> GTModHandler.getModItem("TwilightForest", "item.carminite", 1, 0, new ItemStack(Items.apple))),
     ZPM(6,Materials.Oriharukon, () -> GTModHandler.getModItem("TwilightForest", "item.carminite", 1, 0, new ItemStack(Items.apple))),
-    UV(7, Materials.Osmiridium,() -> GTModHandler.getModItem("dreamcraft", "item.SnowQueenBlood", 1, 0, new ItemStack(Items.cake)));
+    UV(7, Materials.Osmiridium,() -> GTModHandler.getModItem("dreamcraft", "SnowQueenBlood", 1, 0, new ItemStack(Items.cake)));
     // spotless:on
 
     private static final GTTier[] tiers;
