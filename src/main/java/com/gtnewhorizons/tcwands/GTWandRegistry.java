@@ -13,16 +13,16 @@ import com.gtnewhorizons.tcwands.api.WandRecipeCreator;
 import com.gtnewhorizons.tcwands.api.wrappers.CapWrapper;
 
 import gregtech.api.util.GTModHandler;
+import thaumcraft.api.wands.WandRod;
 
 public class GTWandRegistry implements IWandRegistry {
 
     @Override
     public void register() {
-        new WandRecipeCreator("wood").regWandRecipe(
-                0,
-                5,
-                GTModHandler.getModItem("Forestry", "oakStick", 1, 0, new ItemStack(Items.stick)),
-                GTTier.LV).regSceptreRecipe(2.0F);
+        ItemStack stick = GTModHandler.getModItem("Forestry", "oakStick", 1, 0, new ItemStack(Items.stick));
+        WandRod.rods.get("wood").setItem(stick);
+
+        new WandRecipeCreator("wood").regWandRecipe(0, 5, stick, GTTier.LV).regSceptreRecipe(2.0F);
         new WandRecipeCreator("greatwood").regWandRecipe(20, 5, MV).regSceptreRecipe(2F).regUpwardStaffRecipe(75, 15)
                 .regStaffSceptreRecipe(1.4F);
         new WandRecipeCreator("reed").regWandRecipe(60, 10, HV).regSceptreRecipe(1.4F).regUpwardStaffRecipe(125, 15)
