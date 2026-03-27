@@ -56,8 +56,8 @@ public class GTWandRegistry implements IWandRegistry {
                     .regUpwardStaffRecipe(150, 15).regStaffSceptreRecipe(1.2F);
             new WandRecipeCreator("infernal").regWandRecipe(165, 15, IV).regSceptreRecipe(1.35F);
             new WandRecipeCreator("livingwood").regWandRecipe(105, 15, EV).regSceptreRecipe(1.35F);
-            new WandRecipeCreator("dreamwood").regWandRecipe(200, 15, LUV).regSceptreRecipe(1.3F)
-                    .regUpwardStaffRecipe(300, 15).regStaffSceptreRecipe(1.2F);
+            new WandRecipeCreator("dreamwood").regWandRecipe(225, 20, LUV).regSceptreRecipe(1.3F)
+                    .regUpwardStaffRecipe(350, 15).regStaffSceptreRecipe(1.2F);
             new WandRecipeCreator("witchwood").regWandRecipe(115, 15, EV).regSceptreRecipe(1.3F)
                     .regUpwardStaffRecipe(150, 15).regStaffSceptreRecipe(1.2F);
 
@@ -99,7 +99,7 @@ public class GTWandRegistry implements IWandRegistry {
                     9,
                     new ResourceLocation("taintedmagic", "textures/models/ModelWAND_CAP_CRIMSON_CLOTH.png"));
 
-            new WandRecipeCreator("warpwood").regWandRecipe(190, 15, LUV).regSceptreRecipe(1.2F)
+            new WandRecipeCreator("warpwood").regWandRecipe(275, 25, LUV).regSceptreRecipe(1.2F)
                     .regUpwardStaffRecipe(220, 25).regStaffSceptreRecipe(1.2F);
 
             TCWandAPI.regCap(new CapWrapper("cloth", 3));
