@@ -1,6 +1,5 @@
 package com.gtnewhorizons.tcwands.api;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,20 +21,9 @@ import thaumcraft.common.lib.crafting.ArcaneWandRecipe;
 
 public class TCWandAPI {
 
-    private static ArrayList<Object> craftingRecipes;
     private static final ArrayList<IWandRegistry> registries = new ArrayList<>();
     private static final ArrayList<AbstractWandWrapper> wandWrappers = new ArrayList<>();
     private static final ArrayList<CapWrapper> caps = new ArrayList<>();
-
-    static {
-        try {
-            Field f = ThaumcraftApi.class.getDeclaredField("craftingRecipes");
-            f.setAccessible(true);
-            craftingRecipes = (ArrayList<Object>) f.get(null);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Call it during {@link cpw.mods.fml.common.event.FMLInitializationEvent}
@@ -145,8 +133,10 @@ public class TCWandAPI {
         cap.setTexture(texture);
     }
 
+    @SuppressWarnings("unchecked")
     private static void removeTCWands() {
-        craftingRecipes.removeIf(r -> r instanceof ArcaneWandRecipe || r instanceof ArcaneSceptreRecipe);
+        ThaumcraftApi.getCraftingRecipes()
+                .removeIf(r -> r instanceof ArcaneWandRecipe || r instanceof ArcaneSceptreRecipe);
     }
 
     public static ArrayList<CapWrapper> getCaps() {
