@@ -5,9 +5,11 @@ import java.util.List;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.gtnewhorizons.tcwands.api.wrappers.AbstractWandWrapper;
 import com.gtnewhorizons.tcwands.api.wrappers.CapWrapper;
+import com.gtnewhorizons.tcwands.api.wrappers.SceptreWrapper;
 
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
@@ -132,5 +134,29 @@ public class TCWandAPI {
 
     public static ArrayList<AbstractWandWrapper> getWandWrappers() {
         return wandWrappers;
+    }
+
+    public static CapWrapper getWrapperForCap(ItemStack cap) {
+        for (CapWrapper wrapper : caps) {
+            if (OreDictionary.itemMatches(wrapper.getItem(), cap, true)) return wrapper;
+        }
+        return null;
+    }
+
+    public static CapWrapper getWrapperForCap(WandCap cap) {
+        return getWrapperForCap(cap.getItem());
+    }
+
+    public static AbstractWandWrapper getWrapperForRod(ItemStack rod, boolean scepter) {
+        for (AbstractWandWrapper wrapper : wandWrappers) {
+            if ((wrapper instanceof SceptreWrapper == scepter)
+                    && OreDictionary.itemMatches(wrapper.getCraftingRod(), rod, true))
+                return wrapper;
+        }
+        return null;
+    }
+
+    public static AbstractWandWrapper getWrapperForRod(WandRod rod, boolean scepter) {
+        return getWrapperForRod(rod.getItem(), scepter);
     }
 }

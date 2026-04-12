@@ -8,44 +8,37 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.gtnewhorizons.tcwands.api.wrappers.AbstractWandWrapper;
 import com.gtnewhorizons.tcwands.api.wrappers.CapWrapper;
-import com.gtnewhorizons.tcwands.api.wrappers.SceptreWrapper;
 
 import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.lib.research.ResearchManager;
 
 public class GTNHScepterRecipe extends GTNHWandRecipe {
 
-    private static final int[] SLOT_CAP = new int[] { 1, 5, 6 };
+    private static final int[] SLOT_CAP = new int[] { 6, 5, 1 };
     private static final int[] SLOT_SCREW = new int[] { 3, 7 };
     private static final int SLOT_CHARM = 2;
     private static final ItemStack CHARM = new ItemStack(ConfigItems.itemResource, 1, 15);
 
     @Override
-    public boolean matches(IInventory craftingTable, World world, EntityPlayer player) {
-        return super.matches(craftingTable, world, player) && checkPrimalCharm(craftingTable);
+    public boolean matches(IInventory inv, World world, EntityPlayer player) {
+        return super.matches(inv, world, player) && checkPrimalCharm(inv);
     }
 
     @Override
-    public ItemStack getCraftingResult(IInventory craftingTable) {
-        AbstractWandWrapper wandWrapper = getWandWrapper(craftingTable.getStackInSlot(SLOT_CORE));
-        CapWrapper capWrapper = getCapWrapper(craftingTable);
+    public ItemStack getCraftingResult(IInventory inv) {
+        AbstractWandWrapper wandWrapper = getWandWrapper(inv.getStackInSlot(SLOT_CORE));
+        CapWrapper capWrapper = TCWandAPI.getWrapperForCap(inv.getStackInSlot(SLOT_CAP[0]));
         if (wandWrapper == null || capWrapper == null) return null;
         return wandWrapper.getItem(capWrapper);
     }
 
-    private static boolean checkPrimalCharm(IInventory craftingTable) {
-        return OreDictionary.itemMatches(craftingTable.getStackInSlot(SLOT_CHARM), CHARM, true);
+    @Override
+    protected AbstractWandWrapper getWandWrapper(ItemStack rod) {
+        return TCWandAPI.getWrapperForRod(rod, true);
     }
 
-    @Override
-    protected CapWrapper getCapWrapper(IInventory craftingTable) {
-        ItemStack cap = craftingTable.getStackInSlot(SLOT_CAP[0]);
-        for (CapWrapper wrapper : TCWandAPI.getCaps()) {
-            if (OreDictionary.itemMatches(cap, wrapper.getItem(), true)) {
-                return wrapper;
-            }
-        }
-        return null;
+    private static boolean checkPrimalCharm(IInventory inv) {
+        return OreDictionary.itemMatches(inv.getStackInSlot(SLOT_CHARM), CHARM, true);
     }
 
     @Override
@@ -54,24 +47,13 @@ public class GTNHScepterRecipe extends GTNHWandRecipe {
     }
 
     @Override
-    protected AbstractWandWrapper getWandWrapper(ItemStack rodItem) {
-        for (AbstractWandWrapper wrapper : TCWandAPI.getWandWrappers()) {
-            if (!(wrapper instanceof SceptreWrapper)) continue;
-            if (OreDictionary.itemMatches(rodItem, wrapper.getCraftingRod(), true)) {
-                return wrapper;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    protected boolean checkCaps(IInventory craftingTable, EntityPlayer player) {
-        ItemStack cap = craftingTable.getStackInSlot(SLOT_CAP[0]);
-        CapWrapper capWrapper = getCapWrapper(craftingTable);
+    protected boolean checkCaps(IInventory inv, EntityPlayer player) {
+        ItemStack cap = inv.getStackInSlot(SLOT_CAP[0]);
+        CapWrapper capWrapper = TCWandAPI.getWrapperForCap(inv.getStackInSlot(SLOT_CAP[0]));
         return cap != null && capWrapper != null
                 && ResearchManager.isResearchComplete(player.getCommandSenderName(), capWrapper.getResearch())
-                && OreDictionary.itemMatches(cap, craftingTable.getStackInSlot(SLOT_CAP[1]), true)
-                && OreDictionary.itemMatches(cap, craftingTable.getStackInSlot(SLOT_CAP[2]), true);
+                && OreDictionary.itemMatches(cap, inv.getStackInSlot(SLOT_CAP[1]), true)
+                && OreDictionary.itemMatches(cap, inv.getStackInSlot(SLOT_CAP[2]), true);
     }
 
     @Override
@@ -82,8 +64,10 @@ public class GTNHScepterRecipe extends GTNHWandRecipe {
     @Override
     public String[] salisArcana$getResearches(IInventory inv, World world, EntityPlayer player) {
         String[] strings = new String[3];
-        strings[0] = getWandWrapper(inv.getStackInSlot(SLOT_CORE)).getResearchName();
-        strings[1] = getCapWrapper(inv).getResearch();
+        AbstractWandWrapper rod = TCWandAPI.getWrapperForRod(inv.getStackInSlot(SLOT_CORE), true);
+        if (rod != null) strings[0] = rod.getResearchName();
+        CapWrapper cap = TCWandAPI.getWrapperForCap(inv.getStackInSlot(SLOT_CAP[0]));
+        if (cap != null) strings[1] = cap.getResearch();
         strings[2] = "SCEPTRE";
         return strings;
     }
