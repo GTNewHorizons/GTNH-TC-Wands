@@ -6,6 +6,7 @@ dependencies {
 
     api('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev') {transitive = false}
     compileOnly('org.jetbrains:annotations:23.0.0')
+    compileOnly("com.github.GTNewHorizons:Salis-Arcana:1.1.49-GTNH:dev")
 
     runtimeOnly('com.github.GTNewHorizons:AspectRecipeIndex:1.0.11:dev')
     runtimeOnly('com.github.GTNewHorizons:Baubles-Expanded:2.2.11-GTNH:dev')

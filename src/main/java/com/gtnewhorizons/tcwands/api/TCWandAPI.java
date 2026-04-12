@@ -11,7 +11,6 @@ import com.gtnewhorizons.tcwands.api.wrappers.CapWrapper;
 
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.IWandRodOnUpdate;
 import thaumcraft.api.wands.StaffRod;
 import thaumcraft.api.wands.WandCap;
@@ -58,22 +57,10 @@ public class TCWandAPI {
         caps.add(cap);
     }
 
+    @SuppressWarnings("unchecked")
     private static void makeWands() {
-        for (AbstractWandWrapper wandWrapper : wandWrappers) {
-            for (CapWrapper cap : caps) {
-                regRecipe(wandWrapper, cap);
-            }
-        }
-    }
-
-    private static void regRecipe(AbstractWandWrapper wandWrapper, CapWrapper cap) {
-        AspectList aspects = new AspectList();
-        for (Aspect a : Aspect.getPrimalAspects()) {
-            aspects.add(a, wandWrapper.getRecipeCost(cap));
-        }
-
-        ItemStack wand = wandWrapper.getItem(cap);
-        ThaumcraftApi.addArcaneCraftingRecipe(wandWrapper.getResearchName(), wand, aspects, wandWrapper.genRecipe(cap));
+        ThaumcraftApi.getCraftingRecipes().add(new GTNHWandRecipe());
+        ThaumcraftApi.getCraftingRecipes().add(new GTNHScepterRecipe());
     }
 
     /**

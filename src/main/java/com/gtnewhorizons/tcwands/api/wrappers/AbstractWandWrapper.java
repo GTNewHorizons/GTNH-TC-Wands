@@ -14,10 +14,10 @@ import thaumcraft.common.config.ConfigItems;
 
 public abstract class AbstractWandWrapper {
 
-    private WandDetails wandDetails;
-    private WandProps wandProps;
+    private final WandDetails wandDetails;
+    private final WandProps wandProps;
 
-    private String customResearchName;
+    private String research;
     /**
      * Item that will be used in recipe at the place of rod.
      */
@@ -34,6 +34,7 @@ public abstract class AbstractWandWrapper {
                         + ". Be careful to register your custom rod before creating recipes.");
 
         this.craftingRod = wandRod.getItem();
+        this.research = wandRod.getResearch();
     }
 
     public ItemStack getItem(CapWrapper cap) {
@@ -59,8 +60,6 @@ public abstract class AbstractWandWrapper {
         return wandProps.getBaseCost() + wandProps.getCapCost() * cap.getCostMultiplier();
     }
 
-    public abstract Object[] genRecipe(CapWrapper cap);
-
     public WandProps getProps() {
         return wandProps;
     }
@@ -69,17 +68,15 @@ public abstract class AbstractWandWrapper {
         return wandDetails;
     }
 
-    protected abstract String getDefaultResearchName();
-
     @NotNull
     public abstract WandType getType();
 
     public String getResearchName() {
-        return customResearchName != null ? customResearchName : getDefaultResearchName();
+        return research;
     }
 
-    public void setCustomResearchName(String customResearchName) {
-        this.customResearchName = customResearchName;
+    public void setResearch(String research) {
+        this.research = research;
     }
 
     public void setCustomCraftingRod(ItemStack rod) {
