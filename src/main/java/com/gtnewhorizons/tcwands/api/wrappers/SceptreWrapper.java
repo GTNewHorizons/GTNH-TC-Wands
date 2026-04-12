@@ -1,5 +1,6 @@
 package com.gtnewhorizons.tcwands.api.wrappers;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import org.jetbrains.annotations.NotNull;
@@ -7,6 +8,11 @@ import org.jetbrains.annotations.NotNull;
 import com.gtnewhorizons.tcwands.api.WandType;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
+
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.crafting.ShapedArcaneRecipe;
+import thaumcraft.common.config.ConfigItems;
 
 public class SceptreWrapper extends AbstractWandWrapper {
 
@@ -37,5 +43,35 @@ public class SceptreWrapper extends AbstractWandWrapper {
     @Override
     public @NotNull WandType getType() {
         return WandType.SCEPTRE;
+    }
+
+    @Override
+    public ShapedArcaneRecipe getRecipe(CapWrapper cap) {
+        ItemStack wand = getItem(cap);
+        AspectList vis = new AspectList();
+        int cost = getRecipeCost(cap);
+        for (Aspect a : Aspect.getPrimalAspects()) {
+            vis.add(a, cost);
+        }
+        ItemStack conductor = getDetails().getConductor();
+        String screw = getDetails().getScrew();
+        ItemStack capItem = cap.getItem();
+        return new ShapedArcaneRecipe(
+                null,
+                wand,
+                vis,
+                "XCP",
+                "SRC",
+                "CSX",
+                'X',
+                conductor,
+                'S',
+                screw,
+                'C',
+                capItem,
+                'R',
+                getCraftingRod(),
+                'P',
+                new ItemStack(ConfigItems.itemResource, 1, 15));
     }
 }

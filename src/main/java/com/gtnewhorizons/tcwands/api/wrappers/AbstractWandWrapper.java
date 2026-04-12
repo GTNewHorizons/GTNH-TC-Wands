@@ -9,6 +9,9 @@ import com.gtnewhorizons.tcwands.api.WandType;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
 
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.crafting.ShapedArcaneRecipe;
 import thaumcraft.api.wands.WandRod;
 import thaumcraft.common.config.ConfigItems;
 
@@ -46,6 +49,33 @@ public abstract class AbstractWandWrapper {
         wand.setItemDamage(getRecipeCost(cap));
 
         return wand;
+    }
+
+    public ShapedArcaneRecipe getRecipe(CapWrapper cap) {
+        ItemStack wand = getItem(cap);
+        AspectList vis = new AspectList();
+        int cost = getRecipeCost(cap);
+        for (Aspect a : Aspect.getPrimalAspects()) {
+            vis.add(a, cost);
+        }
+        ItemStack conductor = wandDetails.getConductor();
+        String screw = wandDetails.getScrew();
+        ItemStack capItem = cap.getItem();
+        return new ShapedArcaneRecipe(
+                null,
+                wand,
+                vis,
+                "XSC",
+                "SRS",
+                "CSX",
+                'X',
+                conductor,
+                'S',
+                screw,
+                'C',
+                capItem,
+                'R',
+                craftingRod);
     }
 
     protected NBTTagCompound writeNBT(CapWrapper cap) {
