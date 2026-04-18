@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.github.bsideup.jabel.Desugar;
 import com.gtnewhorizons.tcwands.api.wrappers.AbstractWandWrapper;
 import com.gtnewhorizons.tcwands.api.wrappers.CapWrapper;
 import com.gtnewhorizons.tcwands.api.wrappers.SceptreWrapper;
@@ -55,8 +54,7 @@ public class TCWandAPI {
      */
     public static void regWandWrapper(AbstractWandWrapper wandWrapper) {
         wandWrappers.add(wandWrapper);
-        rodTagToWrapper
-                .computeIfAbsent(wandWrapper.getRodName(), k -> new HashMap<>())
+        rodTagToWrapper.computeIfAbsent(wandWrapper.getRodName(), k -> new HashMap<>())
                 .put(wandWrapper instanceof SceptreWrapper, wandWrapper);
     }
 
