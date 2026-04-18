@@ -1,12 +1,15 @@
 package com.gtnewhorizons.tcwands.api;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.github.bsideup.jabel.Desugar;
 import com.gtnewhorizons.tcwands.api.wrappers.AbstractWandWrapper;
 import com.gtnewhorizons.tcwands.api.wrappers.CapWrapper;
 import com.gtnewhorizons.tcwands.api.wrappers.SceptreWrapper;
@@ -24,7 +27,9 @@ public class TCWandAPI {
 
     private static final ArrayList<IWandRegistry> registries = new ArrayList<>();
     private static final ArrayList<AbstractWandWrapper> wandWrappers = new ArrayList<>();
+    private static final Map<String, Map<Boolean, AbstractWandWrapper>> rodTagToWrapper = new HashMap<>();
     private static final ArrayList<CapWrapper> caps = new ArrayList<>();
+    private static final HashMap<String, CapWrapper> capTagToWrapper = new HashMap<>();
 
     /**
      * Call it during {@link cpw.mods.fml.common.event.FMLInitializationEvent}
@@ -50,6 +55,9 @@ public class TCWandAPI {
      */
     public static void regWandWrapper(AbstractWandWrapper wandWrapper) {
         wandWrappers.add(wandWrapper);
+        rodTagToWrapper
+                .computeIfAbsent(wandWrapper.getRodName(), k -> new HashMap<>())
+                .put(wandWrapper instanceof SceptreWrapper, wandWrapper);
     }
 
     /**
@@ -57,6 +65,7 @@ public class TCWandAPI {
      */
     public static void regCap(CapWrapper cap) {
         caps.add(cap);
+        capTagToWrapper.put(cap.getName(), cap);
     }
 
     @SuppressWarnings("unchecked")
@@ -136,27 +145,36 @@ public class TCWandAPI {
         return wandWrappers;
     }
 
-    public static CapWrapper getWrapperForCap(ItemStack cap) {
-        for (CapWrapper wrapper : caps) {
-            if (OreDictionary.itemMatches(wrapper.getItem(), cap, true)) return wrapper;
-        }
-        return null;
+    public static AbstractWandWrapper getWrapperForRod(String tag, boolean scepter) {
+        Map<Boolean, AbstractWandWrapper> inner = rodTagToWrapper.get(tag);
+        return inner != null ? inner.get(scepter) : null;
     }
 
-    public static CapWrapper getWrapperForCap(WandCap cap) {
-        return getWrapperForCap(cap.getItem());
-    }
-
-    public static AbstractWandWrapper getWrapperForRod(ItemStack rod, boolean scepter) {
-        for (AbstractWandWrapper wrapper : wandWrappers) {
-            if ((wrapper instanceof SceptreWrapper == scepter)
-                    && OreDictionary.itemMatches(wrapper.getCraftingRod(), rod, true))
-                return wrapper;
+    public static AbstractWandWrapper getWrapperForRod(ItemStack item, boolean scepter) {
+        for (WandRod rod : WandRod.rods.values()) {
+            if (OreDictionary.itemMatches(rod.getItem(), item, true)) {
+                return getWrapperForRod(rod, scepter);
+            }
         }
         return null;
     }
 
     public static AbstractWandWrapper getWrapperForRod(WandRod rod, boolean scepter) {
-        return getWrapperForRod(rod.getItem(), scepter);
+        return getWrapperForRod(rod.getTag(), scepter);
+    }
+
+    public static CapWrapper getWrapperForCap(String tag) {
+        return capTagToWrapper.get(tag);
+    }
+
+    public static CapWrapper getWrapperForCap(ItemStack item) {
+        for (WandCap cap : WandCap.caps.values()) {
+            if (OreDictionary.itemMatches(cap.getItem(), item, true)) return getWrapperForCap(cap);
+        }
+        return null;
+    }
+
+    public static CapWrapper getWrapperForCap(WandCap cap) {
+        return getWrapperForCap(cap.getTag());
     }
 }
