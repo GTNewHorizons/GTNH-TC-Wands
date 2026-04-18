@@ -53,7 +53,7 @@ public class SceptreWrapper extends AbstractWandWrapper {
         for (Aspect a : Aspect.getPrimalAspects()) {
             vis.add(a, cost);
         }
-        ItemStack conductor = getDetails().getConductor();
+        ItemStack conductor = getDetails().conductor();
         String screw = getDetails().getScrew();
         ItemStack capItem = cap.getItem();
         return new ShapedArcaneRecipe(

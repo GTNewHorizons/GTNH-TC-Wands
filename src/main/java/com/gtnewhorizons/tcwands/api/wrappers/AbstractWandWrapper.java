@@ -58,7 +58,7 @@ public abstract class AbstractWandWrapper {
         for (Aspect a : Aspect.getPrimalAspects()) {
             vis.add(a, cost);
         }
-        ItemStack conductor = wandDetails.getConductor();
+        ItemStack conductor = wandDetails.conductor();
         String screw = wandDetails.getScrew();
         ItemStack capItem = cap.getItem();
         return new ShapedArcaneRecipe(
@@ -87,7 +87,7 @@ public abstract class AbstractWandWrapper {
     }
 
     public int getRecipeCost(CapWrapper cap) {
-        return wandProps.getBaseCost() + wandProps.getCapCost() * cap.getCostMultiplier();
+        return wandProps.baseCost() + wandProps.capCost() * cap.getCostMultiplier();
     }
 
     public WandProps getProps() {
@@ -118,6 +118,6 @@ public abstract class AbstractWandWrapper {
     }
 
     public String getRodName() {
-        return wandDetails.getName();
+        return wandDetails.name();
     }
 }

@@ -35,7 +35,7 @@ public class GTNHWandRecipe implements IArcaneRecipe, IMultipleResearchArcaneRec
             return false;
         WandDetails details = wrapper.getDetails();
         if (!checkScrews(inv, details)) return false;
-        ItemStack conductor = details.getConductor();
+        ItemStack conductor = details.conductor();
         for (int slot : SLOT_CONDUCTOR) {
             if (!OreDictionary.itemMatches(inv.getStackInSlot(slot), conductor, true)) return false;
         }

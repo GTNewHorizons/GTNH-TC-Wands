@@ -95,7 +95,7 @@ public class WandRecipeCreator {
      * Register staff recipe with provided base, cap cost and with level one higher tier and its standard conductor.
      */
     public WandRecipeCreator regUpwardStaffRecipe(int baseCost, int capCost) {
-        GTTier tier = wandDetails.getTier().nextTier();
+        GTTier tier = wandDetails.tier().nextTier();
         return regStaffRecipe(baseCost, capCost, tier);
     }
 
