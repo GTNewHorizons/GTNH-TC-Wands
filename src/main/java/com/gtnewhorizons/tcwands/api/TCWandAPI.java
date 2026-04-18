@@ -1,18 +1,20 @@
 package com.gtnewhorizons.tcwands.api;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.gtnewhorizons.tcwands.api.wrappers.AbstractWandWrapper;
 import com.gtnewhorizons.tcwands.api.wrappers.CapWrapper;
+import com.gtnewhorizons.tcwands.api.wrappers.SceptreWrapper;
 
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.IWandRodOnUpdate;
 import thaumcraft.api.wands.StaffRod;
 import thaumcraft.api.wands.WandCap;
@@ -22,20 +24,11 @@ import thaumcraft.common.lib.crafting.ArcaneWandRecipe;
 
 public class TCWandAPI {
 
-    private static ArrayList<Object> craftingRecipes;
     private static final ArrayList<IWandRegistry> registries = new ArrayList<>();
     private static final ArrayList<AbstractWandWrapper> wandWrappers = new ArrayList<>();
+    private static final Map<String, Map<Boolean, AbstractWandWrapper>> rodTagToWrapper = new HashMap<>();
     private static final ArrayList<CapWrapper> caps = new ArrayList<>();
-
-    static {
-        try {
-            Field f = ThaumcraftApi.class.getDeclaredField("craftingRecipes");
-            f.setAccessible(true);
-            craftingRecipes = (ArrayList<Object>) f.get(null);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-    }
+    private static final HashMap<String, CapWrapper> capTagToWrapper = new HashMap<>();
 
     /**
      * Call it during {@link cpw.mods.fml.common.event.FMLInitializationEvent}
@@ -61,6 +54,8 @@ public class TCWandAPI {
      */
     public static void regWandWrapper(AbstractWandWrapper wandWrapper) {
         wandWrappers.add(wandWrapper);
+        rodTagToWrapper.computeIfAbsent(wandWrapper.getRodName(), k -> new HashMap<>())
+                .put(wandWrapper instanceof SceptreWrapper, wandWrapper);
     }
 
     /**
@@ -68,24 +63,13 @@ public class TCWandAPI {
      */
     public static void regCap(CapWrapper cap) {
         caps.add(cap);
+        capTagToWrapper.put(cap.getName(), cap);
     }
 
+    @SuppressWarnings("unchecked")
     private static void makeWands() {
-        for (AbstractWandWrapper wandWrapper : wandWrappers) {
-            for (CapWrapper cap : caps) {
-                regRecipe(wandWrapper, cap);
-            }
-        }
-    }
-
-    private static void regRecipe(AbstractWandWrapper wandWrapper, CapWrapper cap) {
-        AspectList aspects = new AspectList();
-        for (Aspect a : Aspect.getPrimalAspects()) {
-            aspects.add(a, wandWrapper.getRecipeCost(cap));
-        }
-
-        ItemStack wand = wandWrapper.getItem(cap);
-        ThaumcraftApi.addArcaneCraftingRecipe(wandWrapper.getResearchName(), wand, aspects, wandWrapper.genRecipe(cap));
+        ThaumcraftApi.getCraftingRecipes().add(new GTNHWandRecipe());
+        ThaumcraftApi.getCraftingRecipes().add(new GTNHScepterRecipe());
     }
 
     /**
@@ -145,8 +129,10 @@ public class TCWandAPI {
         cap.setTexture(texture);
     }
 
+    @SuppressWarnings("unchecked")
     private static void removeTCWands() {
-        craftingRecipes.removeIf(r -> r instanceof ArcaneWandRecipe || r instanceof ArcaneSceptreRecipe);
+        ThaumcraftApi.getCraftingRecipes()
+                .removeIf(r -> r instanceof ArcaneWandRecipe || r instanceof ArcaneSceptreRecipe);
     }
 
     public static ArrayList<CapWrapper> getCaps() {
@@ -155,5 +141,38 @@ public class TCWandAPI {
 
     public static ArrayList<AbstractWandWrapper> getWandWrappers() {
         return wandWrappers;
+    }
+
+    public static AbstractWandWrapper getWrapperForRod(String tag, boolean scepter) {
+        Map<Boolean, AbstractWandWrapper> inner = rodTagToWrapper.get(tag);
+        return inner != null ? inner.get(scepter) : null;
+    }
+
+    public static AbstractWandWrapper getWrapperForRod(ItemStack item, boolean scepter) {
+        for (WandRod rod : WandRod.rods.values()) {
+            if (OreDictionary.itemMatches(rod.getItem(), item, true)) {
+                return getWrapperForRod(rod, scepter);
+            }
+        }
+        return null;
+    }
+
+    public static AbstractWandWrapper getWrapperForRod(WandRod rod, boolean scepter) {
+        return getWrapperForRod(rod.getTag(), scepter);
+    }
+
+    public static CapWrapper getWrapperForCap(String tag) {
+        return capTagToWrapper.get(tag);
+    }
+
+    public static CapWrapper getWrapperForCap(ItemStack item) {
+        for (WandCap cap : WandCap.caps.values()) {
+            if (OreDictionary.itemMatches(cap.getItem(), item, true)) return getWrapperForCap(cap);
+        }
+        return null;
+    }
+
+    public static CapWrapper getWrapperForCap(WandCap cap) {
+        return getWrapperForCap(cap.getTag());
     }
 }

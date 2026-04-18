@@ -1,19 +1,6 @@
 package com.gtnewhorizons.tcwands.api.wandinfo;
 
-public class WandProps {
+import com.github.bsideup.jabel.Desugar;
 
-    private int baseCost, capCost;
-
-    public WandProps(int baseCost, int capCost) {
-        this.baseCost = baseCost;
-        this.capCost = capCost;
-    }
-
-    public int getCapCost() {
-        return capCost;
-    }
-
-    public int getBaseCost() {
-        return baseCost;
-    }
-}
+@Desugar
+public record WandProps(int baseCost, int capCost) {}

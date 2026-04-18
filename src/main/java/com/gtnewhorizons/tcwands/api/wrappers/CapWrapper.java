@@ -4,9 +4,10 @@ import net.minecraft.item.ItemStack;
 
 public class CapWrapper {
 
-    private int costMultiplier;
-    private String name;
-    private ItemStack itemStack;
+    private final int costMultiplier;
+    private final String name;
+    private final ItemStack itemStack;
+    private String research;
 
     public CapWrapper(String name, int costMultiplier) {
         this(name, thaumcraft.api.wands.WandCap.caps.get(name).getItem(), costMultiplier);
@@ -16,6 +17,7 @@ public class CapWrapper {
         this.name = name;
         this.costMultiplier = costMultiplier;
         this.itemStack = itemStack;
+        this.research = "CAP_" + name;
     }
 
     public String getName() {
@@ -28,5 +30,13 @@ public class CapWrapper {
 
     public ItemStack getItem() {
         return itemStack;
+    }
+
+    public String getResearch() {
+        return research;
+    }
+
+    public void setResearch(String research) {
+        this.research = research;
     }
 }
