@@ -26,7 +26,8 @@ public class TCWandAPI {
 
     private static final ArrayList<IWandRegistry> registries = new ArrayList<>();
     private static final ArrayList<AbstractWandWrapper> wandWrappers = new ArrayList<>();
-    private static final Map<String, Map<Boolean, AbstractWandWrapper>> rodTagToWrapper = new HashMap<>();
+    private static final Map<String, AbstractWandWrapper> rodTagToWand = new HashMap<>();
+    private static final Map<String, AbstractWandWrapper> rodTagToScepter = new HashMap<>();
     private static final ArrayList<CapWrapper> caps = new ArrayList<>();
     private static final HashMap<String, CapWrapper> capTagToWrapper = new HashMap<>();
 
@@ -54,8 +55,11 @@ public class TCWandAPI {
      */
     public static void regWandWrapper(AbstractWandWrapper wandWrapper) {
         wandWrappers.add(wandWrapper);
-        rodTagToWrapper.computeIfAbsent(wandWrapper.getRodName(), k -> new HashMap<>())
-                .put(wandWrapper instanceof SceptreWrapper, wandWrapper);
+        if (wandWrapper instanceof SceptreWrapper) {
+            rodTagToScepter.put(wandWrapper.getRodName(), wandWrapper);
+        } else {
+            rodTagToWand.put(wandWrapper.getRodName(), wandWrapper);
+        }
     }
 
     /**
@@ -144,8 +148,10 @@ public class TCWandAPI {
     }
 
     public static AbstractWandWrapper getWrapperForRod(String tag, boolean scepter) {
-        Map<Boolean, AbstractWandWrapper> inner = rodTagToWrapper.get(tag);
-        return inner != null ? inner.get(scepter) : null;
+        if (scepter) {
+            return rodTagToScepter.get(tag);
+        }
+        return rodTagToWand.get(tag);
     }
 
     public static AbstractWandWrapper getWrapperForRod(ItemStack item, boolean scepter) {
