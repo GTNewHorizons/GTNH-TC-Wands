@@ -11,7 +11,7 @@ import com.gtnewhorizons.tcwands.api.wrappers.*;
  */
 public class WandRecipeCreator {
 
-    private String name;
+    private final String name;
     private WandDetails wandDetails = null;
     private WandDetails staffDetails = null;
     private WandProps wandProps = null;
@@ -95,7 +95,7 @@ public class WandRecipeCreator {
      * Register staff recipe with provided base, cap cost and with level one higher tier and its standard conductor.
      */
     public WandRecipeCreator regUpwardStaffRecipe(int baseCost, int capCost) {
-        GTTier tier = wandDetails.getTier().nextTier();
+        GTTier tier = wandDetails.tier().nextTier();
         return regStaffRecipe(baseCost, capCost, tier);
     }
 
@@ -156,7 +156,7 @@ public class WandRecipeCreator {
 
     private void applyCustomizations(AbstractWandWrapper wandWrapper) {
         if (customResearchName != null) {
-            wandWrapper.setCustomResearchName(customResearchName);
+            wandWrapper.setResearch(customResearchName);
             customResearchName = null;
         }
 

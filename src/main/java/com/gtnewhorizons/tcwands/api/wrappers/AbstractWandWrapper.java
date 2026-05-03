@@ -9,15 +9,18 @@ import com.gtnewhorizons.tcwands.api.WandType;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandDetails;
 import com.gtnewhorizons.tcwands.api.wandinfo.WandProps;
 
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.crafting.ShapedArcaneRecipe;
 import thaumcraft.api.wands.WandRod;
 import thaumcraft.common.config.ConfigItems;
 
 public abstract class AbstractWandWrapper {
 
-    private WandDetails wandDetails;
-    private WandProps wandProps;
+    private final WandDetails wandDetails;
+    private final WandProps wandProps;
 
-    private String customResearchName;
+    private String research;
     /**
      * Item that will be used in recipe at the place of rod.
      */
@@ -34,6 +37,7 @@ public abstract class AbstractWandWrapper {
                         + ". Be careful to register your custom rod before creating recipes.");
 
         this.craftingRod = wandRod.getItem();
+        this.research = wandRod.getResearch();
     }
 
     public ItemStack getItem(CapWrapper cap) {
@@ -47,6 +51,33 @@ public abstract class AbstractWandWrapper {
         return wand;
     }
 
+    public ShapedArcaneRecipe getRecipe(CapWrapper cap) {
+        ItemStack wand = getItem(cap);
+        AspectList vis = new AspectList();
+        int cost = getRecipeCost(cap);
+        for (Aspect a : Aspect.getPrimalAspects()) {
+            vis.add(a, cost);
+        }
+        ItemStack conductor = wandDetails.conductor();
+        String screw = wandDetails.getScrew();
+        ItemStack capItem = cap.getItem();
+        return new ShapedArcaneRecipe(
+                null,
+                wand,
+                vis,
+                "XSC",
+                "SRS",
+                "CSX",
+                'X',
+                conductor,
+                'S',
+                screw,
+                'C',
+                capItem,
+                'R',
+                craftingRod);
+    }
+
     protected NBTTagCompound writeNBT(CapWrapper cap) {
         NBTTagCompound wandNbt = new NBTTagCompound();
         wandNbt.setString("rod", getRodName());
@@ -56,10 +87,8 @@ public abstract class AbstractWandWrapper {
     }
 
     public int getRecipeCost(CapWrapper cap) {
-        return wandProps.getBaseCost() + wandProps.getCapCost() * cap.getCostMultiplier();
+        return wandProps.baseCost() + wandProps.capCost() * cap.getCostMultiplier();
     }
-
-    public abstract Object[] genRecipe(CapWrapper cap);
 
     public WandProps getProps() {
         return wandProps;
@@ -69,17 +98,15 @@ public abstract class AbstractWandWrapper {
         return wandDetails;
     }
 
-    protected abstract String getDefaultResearchName();
-
     @NotNull
     public abstract WandType getType();
 
     public String getResearchName() {
-        return customResearchName != null ? customResearchName : getDefaultResearchName();
+        return research;
     }
 
-    public void setCustomResearchName(String customResearchName) {
-        this.customResearchName = customResearchName;
+    public void setResearch(String research) {
+        this.research = research;
     }
 
     public void setCustomCraftingRod(ItemStack rod) {
@@ -91,6 +118,6 @@ public abstract class AbstractWandWrapper {
     }
 
     public String getRodName() {
-        return wandDetails.getName();
+        return wandDetails.name();
     }
 }
