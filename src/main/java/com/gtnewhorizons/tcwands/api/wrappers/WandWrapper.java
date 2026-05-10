@@ -20,17 +20,6 @@ public class WandWrapper extends AbstractWandWrapper {
     }
 
     @Override
-    public Object[] genRecipe(CapWrapper cap) {
-        return new Object[] { "MSC", "SRS", "CSM", 'R', getCraftingRod(), 'M', getDetails().getConductor(), 'S',
-                getDetails().getScrew(), 'C', cap.getItem() };
-    }
-
-    @Override
-    public String getDefaultResearchName() {
-        return "BASICTHAUMATURGY";
-    }
-
-    @Override
     public @NotNull WandType getType() {
         return WandType.WAND;
     }
