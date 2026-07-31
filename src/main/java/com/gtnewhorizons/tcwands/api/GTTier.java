@@ -5,7 +5,9 @@ import java.util.function.Supplier;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import gregtech.api.enums.Materials;
+import com.ruling_0.materiallib.api.Material;
+
+import gregtech.api.enums.materials.Materials;
 import gregtech.api.util.GTModHandler;
 
 public enum GTTier {
@@ -32,10 +34,10 @@ public enum GTTier {
     }
 
     private final int index;
-    private final Materials material;
+    private final Material material;
     private Supplier<ItemStack> wandConductorSupplier;
 
-    GTTier(int index, Materials material, Supplier<ItemStack> wandConductorSupplier) {
+    GTTier(int index, Material material, Supplier<ItemStack> wandConductorSupplier) {
         this.index = index;
         this.material = material;
         this.wandConductorSupplier = wandConductorSupplier;
@@ -52,7 +54,7 @@ public enum GTTier {
         return index;
     }
 
-    public Materials getMaterial() {
+    public Material getMaterial() {
         return material;
     }
 
