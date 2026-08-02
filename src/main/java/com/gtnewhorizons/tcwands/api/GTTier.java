@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import com.ruling_0.materiallib.api.Material;
 
 import gregtech.api.enums.materials.Materials;
+import gregtech.api.material.MaterialUtils;
 import gregtech.api.util.GTModHandler;
 
 public enum GTTier {
@@ -56,6 +57,10 @@ public enum GTTier {
 
     public Material getMaterial() {
         return material;
+    }
+
+    public String getScrew() {
+        return "screw" + MaterialUtils.internalName(material);
     }
 
     public ItemStack getConductor() {
