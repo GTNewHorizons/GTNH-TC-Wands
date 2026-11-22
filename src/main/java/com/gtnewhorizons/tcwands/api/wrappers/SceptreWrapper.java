@@ -54,7 +54,7 @@ public class SceptreWrapper extends AbstractWandWrapper {
             vis.add(a, cost);
         }
         ItemStack conductor = getDetails().conductor();
-        String screw = getDetails().getScrew();
+        String screw = getDetails().tier().getScrew();
         ItemStack capItem = cap.getItem();
         return new ShapedArcaneRecipe(
                 null,

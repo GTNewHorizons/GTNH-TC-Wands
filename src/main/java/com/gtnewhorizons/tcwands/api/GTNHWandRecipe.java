@@ -44,7 +44,7 @@ public class GTNHWandRecipe implements IArcaneRecipe, IMultipleResearchArcaneRec
     }
 
     private boolean checkScrews(IInventory inv, WandDetails details) {
-        int screwOredict = OreDictionary.getOreID(details.getScrew());
+        int screwOredict = OreDictionary.getOreID(details.tier().getScrew());
         for (int slot : screwSlots()) {
             final ItemStack s = inv.getStackInSlot(slot);
             if (s == null || !hasOredict(s, screwOredict)) return false;

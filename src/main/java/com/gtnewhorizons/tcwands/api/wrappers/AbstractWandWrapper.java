@@ -59,7 +59,7 @@ public abstract class AbstractWandWrapper {
             vis.add(a, cost);
         }
         ItemStack conductor = wandDetails.conductor();
-        String screw = wandDetails.getScrew();
+        String screw = wandDetails.tier().getScrew();
         ItemStack capItem = cap.getItem();
         return new ShapedArcaneRecipe(
                 null,

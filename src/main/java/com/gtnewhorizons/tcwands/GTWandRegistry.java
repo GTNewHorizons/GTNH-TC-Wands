@@ -12,15 +12,20 @@ import com.gtnewhorizons.tcwands.api.TCWandAPI;
 import com.gtnewhorizons.tcwands.api.WandRecipeCreator;
 import com.gtnewhorizons.tcwands.api.wrappers.CapWrapper;
 
-import gregtech.api.util.GTModHandler;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.GameRegistry;
 import thaumcraft.api.wands.WandRod;
+import thaumcraft.common.config.Config;
 
 public class GTWandRegistry implements IWandRegistry {
 
     @Override
     public void register() {
-        ItemStack stick = GTModHandler.getModItem("Forestry", "oakStick", 1, 0, new ItemStack(Items.stick));
-        WandRod.rods.get("wood").setItem(stick);
+        ItemStack stick = new ItemStack(Items.stick);
+        if (Loader.isModLoaded("Forestry")) {
+            stick = GameRegistry.findItemStack("Forestry", "oakStick", 1);
+            WandRod.rods.get("wood").setItem(stick);
+        }
 
         new WandRecipeCreator("wood").regWandRecipe(0, 5, stick, GTTier.LV).regSceptreRecipe(2.0F);
         new WandRecipeCreator("greatwood").regWandRecipe(20, 5, MV).regSceptreRecipe(2F).regUpwardStaffRecipe(75, 15)
@@ -42,9 +47,13 @@ public class GTWandRegistry implements IWandRegistry {
         new WandRecipeCreator("primal").regStaffRecipe(175, 20, IV).regStaffSceptreRecipe(1.25F);
 
         TCWandAPI.regCap(new CapWrapper("iron", 0));
-        TCWandAPI.regCap(new CapWrapper("copper", 1));
+        if (Config.foundCopperIngot) {
+            TCWandAPI.regCap(new CapWrapper("copper", 1));
+        }
         TCWandAPI.regCap(new CapWrapper("gold", 2));
-        TCWandAPI.regCap(new CapWrapper("silver", 3));
+        if (Config.foundSilverIngot) {
+            TCWandAPI.regCap(new CapWrapper("silver", 3));
+        }
         TCWandAPI.regCap(new CapWrapper("thaumium", 5));
         TCWandAPI.regCap(new CapWrapper("void", 7));
 
@@ -86,15 +95,21 @@ public class GTWandRegistry implements IWandRegistry {
         if (CompatibleMods.TAINTED_MAGIC.isPresent()) {
             TCWandsMod.LOGGER.info("Detected Tainted Magic. Applying GTNH Patches and Recipes...");
             // Override Tainted Magic Caps
+            ItemStack shadowcloth = GameRegistry.findItemStack("TaintedMagic", "ItemWandCap", 1);
+            assert shadowcloth != null;
+            Items.feather.setDamage(shadowcloth, 3);
             TCWandAPI.makeCap(
                     "shadowcloth",
-                    GTModHandler.getModItem("TaintedMagic", "ItemWandCap", 1, 3),
+                    shadowcloth,
                     0.85F,
                     7,
                     new ResourceLocation("taintedmagic", "textures/models/ModelWAND_CAP_SHADOW_CLOTH.png"));
+            ItemStack crimsoncloth = GameRegistry.findItemStack("TaintedMagic", "ItemWandCap", 1);
+            assert crimsoncloth != null;
+            Items.feather.setDamage(crimsoncloth, 2);
             TCWandAPI.makeCap(
                     "crimsoncloth",
-                    GTModHandler.getModItem("TaintedMagic", "ItemWandCap", 1, 2),
+                    crimsoncloth,
                     0.80F,
                     9,
                     new ResourceLocation("taintedmagic", "textures/models/ModelWAND_CAP_CRIMSON_CLOTH.png"));

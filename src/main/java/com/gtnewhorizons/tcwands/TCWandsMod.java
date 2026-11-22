@@ -19,18 +19,15 @@ public class TCWandsMod {
     public static final String MODID = "gtnhtcwands";
     public static final String NAME = "GTNH-TC-Wands";
     public static final String VERSION = "GRADLETOKEN_VERSION";
-    public static final String DEPENDENCIES = "required-after:Thaumcraft;"
-            /* + "required-after:dreamcraft;" */// will be automatically uncommented while building
-            + "required-after:gregtech;"
-            + "required-after:TwilightForest;"
+    public static final String DEPENDENCIES = "required-after:Thaumcraft;" + "after:dreamcraft;"
+            + "after:gregtech;"
+            + "after:TwilightForest;"
             + "after:ForbiddenMagic;"
             + "after:TaintedMagic;"
             + "after:BloodArsenal;"
             + "after:thaumicbases;"
             + "after:ThaumicExploration;"
-            + "after:ThaumicTinkerer;"
-            + "after:ChromatiCraft;";
-    /** ChromatiCraft is non-supported content. if this ever errors out in some way feel free to remove this. */
+            + "after:ThaumicTinkerer;";
 
     public static final Logger LOGGER = LogManager.getLogger(NAME);
     @Mod.Instance
