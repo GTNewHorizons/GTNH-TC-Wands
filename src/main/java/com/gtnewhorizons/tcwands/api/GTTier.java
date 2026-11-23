@@ -6,6 +6,9 @@ import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
+/**
+ * Do not load this class before mods register their items in pre-init.
+ */
 public enum GTTier {
 
     LV("screwAluminium", getModItem("TwilightForest", "item.nagaScale", Items.wheat)),
