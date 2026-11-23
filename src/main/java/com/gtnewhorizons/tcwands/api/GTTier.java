@@ -1,20 +1,21 @@
 package com.gtnewhorizons.tcwands.api;
 
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public enum GTTier {
 
-    LV("screwAluminium", getModItem("TwilightForest", "item.nagaScale", new ItemStack(Items.wheat))),
-    MV("screwStainlessSteel", getModItem("dreamcraft", "LichBone", new ItemStack(Items.carrot))),
-    HV("screwEnergeticAlloy", getModItem("dreamcraft", "LichBone", new ItemStack(Items.carrot))),
-    EV("screwVibrantAlloy", getModItem("TwilightForest", "item.fieryBlood", new ItemStack(Items.potato))),
-    IV("screwTungstenSteel", getModItem("TwilightForest", "item.fieryTears", new ItemStack(Items.poisonous_potato))),
-    LUV("screwEnderium", getModItem("TwilightForest", "item.carminite", new ItemStack(Items.apple))),
-    ZPM("screwOriharukon", getModItem("TwilightForest", "item.carminite", new ItemStack(Items.apple))),
-    UV("screwOsmiridium", getModItem("dreamcraft", "SnowQueenBlood", new ItemStack(Items.cake)));
+    LV("screwAluminium", getModItem("TwilightForest", "item.nagaScale", Items.wheat)),
+    MV("screwStainlessSteel", getModItem("dreamcraft", "LichBone", Items.carrot)),
+    HV("screwEnergeticAlloy", getModItem("dreamcraft", "LichBone", Items.carrot)),
+    EV("screwVibrantAlloy", getModItem("TwilightForest", "item.fieryBlood", Items.potato)),
+    IV("screwTungstenSteel", getModItem("TwilightForest", "item.fieryTears", Items.poisonous_potato)),
+    LUV("screwEnderium", getModItem("TwilightForest", "item.carminite", Items.apple)),
+    ZPM("screwOriharukon", getModItem("TwilightForest", "item.carminite", Items.apple)),
+    UV("screwOsmiridium", getModItem("dreamcraft", "SnowQueenBlood", Items.cake));
 
     private final String screw;
     private final ItemStack conductor;
@@ -45,8 +46,8 @@ public enum GTTier {
         }
     }
 
-    private static ItemStack getModItem(String mod, String item, ItemStack defaultStack) {
+    private static ItemStack getModItem(String mod, String item, Item defaultItem) {
         ItemStack stack = GameRegistry.findItemStack(mod, item, 1);
-        return stack == null ? defaultStack : stack;
+        return stack == null ? new ItemStack(defaultItem) : stack;
     }
 }
