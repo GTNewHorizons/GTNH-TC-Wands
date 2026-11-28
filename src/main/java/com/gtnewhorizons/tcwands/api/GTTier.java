@@ -4,10 +4,12 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.LoaderState;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
- * Do not load this class before mods register their items in pre-init.
+ * This class mut not be loaded before FML Initialization to allow mods to register their items.
  */
 public enum GTTier {
 
@@ -19,6 +21,12 @@ public enum GTTier {
     LUV("screwEnderium", getModItem("TwilightForest", "item.carminite", Items.apple)),
     ZPM("screwOriharukon", getModItem("TwilightForest", "item.carminite", Items.apple)),
     UV("screwOsmiridium", getModItem("dreamcraft", "SnowQueenBlood", Items.cake));
+
+    static {
+        if (Loader.instance().getLoaderState().ordinal() < LoaderState.INITIALIZATION.ordinal()) {
+            throw new RuntimeException("GTTier must not be loaded before FML Initialization");
+        }
+    }
 
     private final String screw;
     private final ItemStack conductor;
