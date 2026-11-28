@@ -1,71 +1,64 @@
 package com.gtnewhorizons.tcwands.api;
 
-import java.util.function.Supplier;
-
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import gregtech.api.enums.Materials;
-import gregtech.api.util.GTModHandler;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.LoaderState;
+import cpw.mods.fml.common.registry.GameRegistry;
 
+/**
+ * This class mut not be loaded before FML Initialization to allow mods to register their items.
+ */
 public enum GTTier {
 
-    // spotless:off
-    LV(0, Materials.Aluminium,() -> GTModHandler.getModItem("TwilightForest", "item.nagaScale", 1, 0, new ItemStack(Items.wheat))),
-    MV(1, Materials.StainlessSteel,() -> GTModHandler.getModItem("dreamcraft", "LichBone", 1, 0, new ItemStack(Items.carrot))),
-    HV(2, Materials.EnergeticAlloy,() -> GTModHandler.getModItem("dreamcraft", "LichBone", 1, 0, new ItemStack(Items.carrot))),
-    EV(3, Materials.VibrantAlloy,() -> GTModHandler.getModItem("TwilightForest", "item.fieryBlood", 1, 0, new ItemStack(Items.potato))),
-    IV(4, Materials.TungstenSteel,() -> GTModHandler.getModItem("TwilightForest", "item.fieryTears", 1, 0, new ItemStack(Items.poisonous_potato))),
-    LUV(5,Materials.Enderium, () -> GTModHandler.getModItem("TwilightForest", "item.carminite", 1, 0, new ItemStack(Items.apple))),
-    ZPM(6,Materials.Oriharukon, () -> GTModHandler.getModItem("TwilightForest", "item.carminite", 1, 0, new ItemStack(Items.apple))),
-    UV(7, Materials.Osmiridium,() -> GTModHandler.getModItem("dreamcraft", "SnowQueenBlood", 1, 0, new ItemStack(Items.cake)));
-    // spotless:on
-
-    private static final GTTier[] tiers;
+    LV("screwAluminium", getModItem("TwilightForest", "item.nagaScale", Items.wheat)),
+    MV("screwStainlessSteel", getModItem("dreamcraft", "LichBone", Items.carrot)),
+    HV("screwEnergeticAlloy", getModItem("dreamcraft", "LichBone", Items.carrot)),
+    EV("screwVibrantAlloy", getModItem("TwilightForest", "item.fieryBlood", Items.potato)),
+    IV("screwTungstenSteel", getModItem("TwilightForest", "item.fieryTears", Items.poisonous_potato)),
+    LUV("screwEnderium", getModItem("TwilightForest", "item.carminite", Items.apple)),
+    ZPM("screwOriharukon", getModItem("TwilightForest", "item.carminite", Items.apple)),
+    UV("screwOsmiridium", getModItem("dreamcraft", "SnowQueenBlood", Items.cake));
 
     static {
-        final GTTier[] values = values();
-        tiers = new GTTier[values.length];
-        for (GTTier tier : values) {
-            tiers[tier.getIndex()] = tier;
+        if (Loader.instance().getLoaderState().ordinal() < LoaderState.INITIALIZATION.ordinal()) {
+            throw new RuntimeException("GTTier must not be loaded before FML Initialization");
         }
     }
 
-    private final int index;
-    private final Materials material;
-    private Supplier<ItemStack> wandConductorSupplier;
+    private final String screw;
+    private final ItemStack conductor;
 
-    GTTier(int index, Materials material, Supplier<ItemStack> wandConductorSupplier) {
-        this.index = index;
-        this.material = material;
-        this.wandConductorSupplier = wandConductorSupplier;
+    GTTier(String screw, ItemStack conductor) {
+        this.screw = screw;
+        this.conductor = conductor;
     }
 
-    public static void init() {
-        for (GTTier tier : values()) {// is needed for optimization
-            ItemStack conductor = tier.wandConductorSupplier.get();
-            tier.wandConductorSupplier = () -> conductor;
-        }
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public Materials getMaterial() {
-        return material;
+    public String getScrew() {
+        return screw;
     }
 
     public ItemStack getConductor() {
-        return wandConductorSupplier.get();
+        return conductor;
     }
+
+    private static final GTTier[] values = values();
 
     /**
      * Returns the next tier. If current tier is the last, it will return itself.
      */
     public GTTier nextTier() {
-        if (getIndex() >= tiers.length - 1) {
+        if (this.ordinal() >= values.length - 1) {
             return this;
-        } else return tiers[getIndex() + 1];
+        } else {
+            return values[this.ordinal() + 1];
+        }
+    }
+
+    private static ItemStack getModItem(String mod, String item, Item defaultItem) {
+        ItemStack stack = GameRegistry.findItemStack(mod, item, 1);
+        return stack == null ? new ItemStack(defaultItem) : stack;
     }
 }

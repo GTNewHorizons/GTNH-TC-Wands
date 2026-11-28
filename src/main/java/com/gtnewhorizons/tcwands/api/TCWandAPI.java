@@ -39,8 +39,6 @@ public class TCWandAPI {
     }
 
     public static void init() {
-        GTTier.init();
-
         removeTCWands();
 
         for (IWandRegistry registry : registries) {
